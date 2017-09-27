@@ -54,7 +54,7 @@
         android:text="Opret bruger" />
 
     <Button
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="125dp"
         android:layout_gravity="center"
         android:id="@+id/button3"
         style="@style/Widget.AppCompat.Button.Borderless"
