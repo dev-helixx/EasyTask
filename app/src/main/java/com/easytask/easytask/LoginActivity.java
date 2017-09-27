@@ -1,6 +1,8 @@
 package com.easytask.easytask;
 
+
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +19,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /* Hides the actionbar on the login screen. This needs to be called before setContentView */
+        ActionBar actionBar =  getSupportActionBar();
+        actionBar.hide();
+
         setContentView(R.layout.activity_login);
+
 
         /* Instantiate views*/
         mainLoginBtn = (Button)findViewById(R.id.main_login_button);
