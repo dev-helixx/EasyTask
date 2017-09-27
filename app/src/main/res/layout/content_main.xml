@@ -9,56 +9,12 @@
     tools:context="com.easytask.easytask.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <ImageView
-        android:layout_marginTop="10dp"
-        android:id="@+id/imageView2"
+
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/easytasklogo" />
-
-    <EditText
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Brugernavn"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword" />
-
-    <Button
-        android:background="#49c155"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Log ind" />
-
-    <Button
-        android:layout_gravity="center"
-        android:id="@+id/button2"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Opret bruger" />
-
-    <Button
-        android:layout_marginTop="125dp"
-        android:layout_gravity="center"
-        android:id="@+id/button3"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Log ind her for at oprette opgave" />
+        android:text="Main Screen after login"
+        android:textAlignment="center"
+        android:textSize="24sp" />
 </LinearLayout>
