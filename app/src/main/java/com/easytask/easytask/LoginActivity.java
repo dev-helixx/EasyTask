@@ -30,12 +30,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         /* Instantiate views*/
         mainLoginBtn = (Button)findViewById(R.id.main_login_button);
         signupBtn = (Button)findViewById(R.id.signup_button);
-        createTaskLoginBtn = (Button)findViewById(R.id.create_task_login_button);
 
         /* Assign click handlers to buttons */
         mainLoginBtn.setOnClickListener(this);
         signupBtn.setOnClickListener(this);
-        createTaskLoginBtn.setOnClickListener(this);
 
 
     }
@@ -54,10 +52,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         else if (v == signupBtn)
         {
             Toast.makeText(this, "Signup", Toast.LENGTH_SHORT).show();
-        }
-        else if(v == createTaskLoginBtn)
-        {
-            Toast.makeText(this, "create task", Toast.LENGTH_SHORT).show();
         }
     }
 }
