@@ -1,8 +1,15 @@
 <resources>
-    <string name="app_name">EasyTask</string>
 
+    <!-- All texts in the app -->
+
+    <string name="app_name">EasyTask</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
+
+    <string name="loginBtn">Log in</string>
+    <string name="create_user">Create User</string>
+    <string name="create_user_description">Please fill out the fields below</string>
+    <string name="email">Email</string>
+
 </resources>

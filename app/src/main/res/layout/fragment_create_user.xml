@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_rc"
+    tools:context="com.easytask.easytask.frontend.views.LoginActivity"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="15dp">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Create User"
+        android:layout_gravity="center"
+        android:textSize="30sp" />
+
+
+    <Button
+        android:id="@+id/create_return_btn"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_marginTop="300dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Return to login screen" />
+
+
+
+</LinearLayout>
