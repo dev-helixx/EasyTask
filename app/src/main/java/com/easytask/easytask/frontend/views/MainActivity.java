@@ -1,4 +1,4 @@
-package com.easytask.easytask;
+package com.easytask.easytask.frontend.views;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.easytask.easytask.R;
+
+/**
+ * Created by Silas on 27-09-2017.
+ */
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

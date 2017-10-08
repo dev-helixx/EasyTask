@@ -1,4 +1,4 @@
-package com.easytask.easytask;
+package com.easytask.easytask.frontend.views;
 
 
 import android.content.Intent;
@@ -8,13 +8,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import com.easytask.easytask.R;
+
+
+/**
+ * Created by Silas on 27-09-2017.
+ */
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
 
     Button mainLoginBtn;
     Button signupBtn;
-    Button createTaskLoginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
