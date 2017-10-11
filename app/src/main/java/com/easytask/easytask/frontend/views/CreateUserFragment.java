@@ -67,6 +67,8 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
         return_btn.setOnClickListener(this);
         create_user_btn.setOnClickListener(this);
 
+
+        /* Hides keyboard when user clicks on the layout */
         InputMethodManager inputManager = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
                 InputMethodManager.HIDE_NOT_ALWAYS);
@@ -124,30 +126,7 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
 
     }
 
-//
-//
-//    @Override
-//    public boolean dispatchTouchEvent(MotionEvent ev) {
-//
-//        /* Hides keyboard whenever user touches outside of edittext */
-//
-//        View view = getActivity().getCurrentFocus();
-//        if (view != null && (ev.getAction() == MotionEvent.ACTION_UP || ev.getAction() == MotionEvent.ACTION_MOVE) && view instanceof EditText && !view.getClass().getName().startsWith("android.webkit.")) {
-//            int scrcoords[] = new int[2];
-//            view.getLocationOnScreen(scrcoords);
-//            float x = ev.getRawX() + view.getLeft() - scrcoords[0];
-//            float y = ev.getRawY() + view.getTop() - scrcoords[1];
-//            if (x < view.getLeft() || x > view.getRight() || y < view.getTop() || y > view.getBottom())
-//                ((InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow((getActivity().getWindow().getDecorView().getApplicationWindowToken()), 0);
-//        }
-//        return getActivity().dispatchTouchEvent(ev);
-//    }
-//
-//
-//    @Override
-//    public boolean onTouch(View v, MotionEvent event) {
-//        return false;
-//    }
+
 
     public void hideFragment() {
         if (getFragmentManager().findFragmentById(R.id.fragment_container_login).isVisible()) {
