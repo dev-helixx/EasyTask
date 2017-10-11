@@ -59,11 +59,16 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
 
             }
         }else if(view == create_user_btn ) {
-
             Toast.makeText(this.getContext(), "User created click", Toast.LENGTH_SHORT).show();
+            createUser();
+
         }
     }
 
 
+
+    public void createUser() {
+        /* Add firebase method to create new user*/
+    }
 
 }
