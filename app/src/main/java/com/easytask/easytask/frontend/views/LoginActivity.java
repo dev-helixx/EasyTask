@@ -96,6 +96,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if(validator.checkEmail(email) && validator.checkPassword(password))
                 {
 
+                    // TODO: create asynctask to show progress dialog while trying to authorize
+
                     firebaseAuth.signInWithEmailAndPassword(email, password)
                             .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
