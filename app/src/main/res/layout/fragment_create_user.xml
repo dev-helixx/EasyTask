@@ -102,7 +102,7 @@
         <Button
             android:layout_marginTop="15dp"
             android:id="@+id/create_user_btn"
-            android:background="@color/farve3"
+            android:background="@color/blåFarve3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Create User" />

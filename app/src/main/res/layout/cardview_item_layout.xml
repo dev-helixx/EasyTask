@@ -12,7 +12,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="130dp"
+<<<<<<< HEAD
         android:background="@color/farve2"
+=======
+        android:background="@color/blåFarve1"
+>>>>>>> 8221014a7541e8eae195ab9b3c5ba7708d659a79
         android:orientation="vertical">
 
 
