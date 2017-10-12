@@ -10,8 +10,9 @@
     tools:showIn="@layout/app_bar_main">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/card_recyclerview"
+        android:id="@+id/recyclerview"
         android:scrollbars="vertical"
+        android:elevation="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>

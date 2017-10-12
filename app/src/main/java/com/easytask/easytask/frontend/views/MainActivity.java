@@ -13,6 +13,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.easytask.easytask.R;
+import com.easytask.easytask.frontend.views.controller.Task;
+import com.easytask.easytask.frontend.views.controller.RVAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Silas on 27-09-2017.
@@ -20,9 +25,8 @@ import com.easytask.easytask.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView recyclerView;
+    private List<Task> tasks;
 
 
     @Override
@@ -32,14 +36,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        initializeCardViewData();
+
+
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
+        recyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(llm);
+
+        RVAdapter adapter = new RVAdapter(tasks);
+        recyclerView.setAdapter(adapter);
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -50,6 +59,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+    }
+
+
+    // This method creates an ArrayList that has three Task objects
+    // Checkout the project associated with this tutorial on Github if
+    // you want to use the same images.
+    private void initializeCardViewData(){
+
+        tasks = new ArrayList<>();
+
+        tasks.add(new Task("Slå græs", "Jeg skal have slået min græsplæne"));
+        tasks.add(new Task("Vaske bil", "Min bil skal vaskes!"));
+        tasks.add(new Task("Vaske terasse", "Skal vaskes hurtigt, er meget beskidt"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
 
     }
 
