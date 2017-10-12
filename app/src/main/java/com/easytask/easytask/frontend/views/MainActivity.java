@@ -1,11 +1,8 @@
 package com.easytask.easytask.frontend.views;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,10 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.easytask.easytask.R;
-import com.easytask.easytask.frontend.views.controller.RVAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Silas on 27-09-2017.
@@ -57,24 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        String[] test = new String[1];
-        test[0] = "Hej";
 
-
-        mRecyclerView = (RecyclerView) findViewById(R.id.card_recyclerview);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        // specify an adapter (see also next example)
-
-        mAdapter = new RVAdapter(test);
-        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
