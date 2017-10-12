@@ -9,12 +9,10 @@
     tools:context="com.easytask.easytask.frontend.views.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-
-    <TextView
-        android:id="@+id/textView2"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/card_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Main Screen after login"
-        android:textAlignment="center"
-        android:textSize="24sp" />
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+
 </LinearLayout>
