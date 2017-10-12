@@ -2,12 +2,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    android:background="@color/farve2"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior" >
-
-
+    android:background="@color/blåFarve10"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
     <ScrollView
@@ -27,7 +25,7 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
-                app:srcCompat="@mipmap/easytask" />
+                app:srcCompat="@mipmap/easytasklogo1" />
 
             <!-- Email Label -->
             <android.support.design.widget.TextInputLayout
@@ -65,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:background="@color/farve3"
+                android:background="@color/blåFarve3"
                 android:text="Log ind" />
 
             <Button
@@ -78,18 +76,16 @@
                 android:text="Opret bruger" />
 
 
-
-
         </LinearLayout>
 
     </ScrollView>
 
     <FrameLayout
+        android:id="@+id/fragment_container_login"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fragment_container_login">
-    </FrameLayout>
-
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"></FrameLayout>
 
 
 </RelativeLayout>
