@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:background="@color/blåFarve3"
+                android:background="@color/blåFarve5"
                 android:text="Log ind" />
 
             <Button
