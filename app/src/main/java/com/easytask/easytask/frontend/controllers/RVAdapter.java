@@ -1,4 +1,4 @@
-package com.easytask.easytask.frontend.views.controller;
+package com.easytask.easytask.frontend.controllers;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -52,13 +52,13 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
 
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
-        CardView cv;
+//        CardView cv;
         TextView card_subject;
         TextView card_description;
 
         PersonViewHolder(View itemView) {
             super(itemView);
-            cv = (CardView)itemView.findViewById(R.id.cv);
+//            cv = (CardView)itemView.findViewById(R.id.cv);
             card_subject = (TextView)itemView.findViewById(R.id.card_subject);
             card_description = (TextView)itemView.findViewById(R.id.card_description);
         }

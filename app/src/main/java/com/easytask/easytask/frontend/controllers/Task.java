@@ -1,4 +1,4 @@
-package com.easytask.easytask.frontend.views.controller;
+package com.easytask.easytask.frontend.controllers;
 
 
 /**
@@ -7,8 +7,8 @@ package com.easytask.easytask.frontend.views.controller;
 
 public class Task {
 
-    public String card_subject;
-    public String card_description;
+    protected String card_subject;
+    protected String card_description;
 
     public Task(String card_subject, String card_description) {
         this.card_subject = card_subject;

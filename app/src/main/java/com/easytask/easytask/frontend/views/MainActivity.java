@@ -13,8 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.easytask.easytask.R;
-import com.easytask.easytask.frontend.views.controller.Task;
-import com.easytask.easytask.frontend.views.controller.RVAdapter;
+import com.easytask.easytask.frontend.controllers.Task;
+import com.easytask.easytask.frontend.controllers.RVAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,9 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    // This method creates an ArrayList that has three Task objects
-    // Checkout the project associated with this tutorial on Github if
-    // you want to use the same images.
+    // This method creates an ArrayList that has four Task objects
     private void initializeCardViewData(){
 
         tasks = new ArrayList<>();
@@ -74,6 +72,64 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tasks.add(new Task("Vaske bil", "Min bil skal vaskes!"));
         tasks.add(new Task("Vaske terasse", "Skal vaskes hurtigt, er meget beskidt"));
         tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
+
 
     }
 
