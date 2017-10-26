@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.easytask.easytask.R;
 import com.easytask.easytask.frontend.controllers.Task;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /* Initializes data to be displayed on the cards */
         initializeCardViewData();
 
 
@@ -158,8 +160,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_addTask) {
+            Toast.makeText(this, "Add something", Toast.LENGTH_SHORT).show();
+
         }
 
         return super.onOptionsItemSelected(item);

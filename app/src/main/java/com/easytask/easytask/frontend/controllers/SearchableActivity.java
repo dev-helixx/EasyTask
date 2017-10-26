@@ -5,4 +5,6 @@ package com.easytask.easytask.frontend.controllers;
  */
 
 public class SearchableActivity {
+
+
 }
