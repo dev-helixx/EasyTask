@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,12 +10,27 @@
     tools:context="com.easytask.easytask.frontend.views.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:scrollbars="vertical"
-        android:elevation="5dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerviewLayout">
 
-</LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:scrollbars="vertical"
+            android:elevation="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:id="@+id/fragment_container_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"></FrameLayout>
+
+</RelativeLayout>

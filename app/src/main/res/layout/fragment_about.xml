@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:clickable="true"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context="com.easytask.easytask.frontend.views.AboutFragment">
+
+    <TextView
+        android:id="@+id/about_label"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_blank_fragment" />
+
+</LinearLayout>

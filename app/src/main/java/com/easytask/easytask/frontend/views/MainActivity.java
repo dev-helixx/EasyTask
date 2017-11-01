@@ -1,6 +1,8 @@
 package com.easytask.easytask.frontend.views;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.design.widget.NavigationView;
@@ -11,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.easytask.easytask.R;
@@ -27,6 +31,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView recyclerView;
+    private LinearLayout recyclerViewLayout;
     private List<Task> tasks;
 
 
@@ -40,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         /* Initializes data to be displayed on the cards */
         initializeCardViewData();
 
+        recyclerViewLayout = (LinearLayout) findViewById(R.id.recyclerviewLayout);
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
@@ -143,6 +149,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
+
+        if(recyclerViewLayout.getVisibility() == View.GONE) {
+            recyclerViewLayout.setVisibility(View.VISIBLE);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -174,13 +186,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if(id == R.id.nav_findtasks) {
+            startActivity(new Intent(this, MainActivity.class));
+            this.finish();
+        } else if (id == R.id.nav_myprofile) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_mytasks) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_about) {
+
+            recyclerViewLayout.setVisibility(View.GONE);
+
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
+            ft.add(R.id.fragment_container_main, new AboutFragment());
+            ft.addToBackStack(null);
+            ft.commit();
 
         } else if (id == R.id.nav_logout) {
             this.finish();
@@ -190,4 +211,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
 }
