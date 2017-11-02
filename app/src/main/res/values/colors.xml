@@ -13,5 +13,6 @@
     <color name="blåFarve8">#cef0fc</color>
     <color name="blåFarve9">#e6f7fd</color>
     <color name="blåFarve10">#f2fbfe</color>
+    <color name="hvid">#FFFFFF</color>
 
 </resources>
