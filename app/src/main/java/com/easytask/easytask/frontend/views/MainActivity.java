@@ -2,6 +2,7 @@ package com.easytask.easytask.frontend.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -147,14 +148,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if(recyclerViewLayout.getVisibility() == View.GONE) {
+                recyclerViewLayout.setVisibility(View.VISIBLE);
+
+                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container_main);
+                if(fragment != null)
+                    getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+
+            }else {
+                super.onBackPressed();
+            }
         }
 
-        if(recyclerViewLayout.getVisibility() == View.GONE) {
-            recyclerViewLayout.setVisibility(View.VISIBLE);
-        } else {
-            super.onBackPressed();
-        }
     }
 
     @Override
@@ -199,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
-            ft.add(R.id.fragment_container_main, new AboutFragment());
+            ft.replace(R.id.fragment_container_main, new AboutFragment());
             ft.addToBackStack(null);
             ft.commit();
 

@@ -1,6 +1,10 @@
 package com.easytask.easytask.frontend.views;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -15,10 +19,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.easytask.easytask.R;
+import com.easytask.easytask.frontend.controllers.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by Silas on 27-09-2017.
@@ -30,6 +37,10 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
     private EditText usernameET, passwordET, confirmPassET;
     private String username, password;
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference database;
+    private ProgressDialog progressDialog;
+    private LoadViewTask loadViewTask;
+    private SharedPreferences sharedPrefs;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +57,8 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        database = FirebaseDatabase.getInstance().getReference();
 
         usernameET = (EditText) view.findViewById(R.id.create_email_tbox);
         passwordET = (EditText) view.findViewById(R.id.create_pwd1_tbox);
@@ -67,32 +80,38 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
     }
 
 
+
+    private boolean checkUser() {
+        return firebaseAuth.getCurrentUser() != null;
+    }
+
     @Override
     public void onClick(View view) {
         if (view == return_btn) {
-            hideFragment();
+            removeFragment();
         }else if(view == create_user_btn ) {
 
             username = usernameET.getText().toString();
-
             if(passwordET.getText().toString().equals(confirmPassET.getText().toString())){
 //                Toast.makeText(getContext(), "Passwords match", Toast.LENGTH_SHORT).show();
                 password = passwordET.getText().toString();
 
-                createUser(username, password);
+                loadViewTask = new LoadViewTask();
+                loadViewTask.execute();
             }
             else{
                 Toast.makeText(getContext(), "Passwords does not match!", Toast.LENGTH_LONG).show();
             }
+
+
 
         }
     }
 
 
 
-    public void createUser(String username, String password) {
+    public void createUser() {
         /* Add firebase method to create new user*/
-
 
         firebaseAuth.createUserWithEmailAndPassword(username, password)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
@@ -101,16 +120,9 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
                         if (task.isSuccessful()) {
                             Toast.makeText(getContext(), "User created!!", Toast.LENGTH_LONG).show();
 
-                            hideFragment();
-                            // Sign in success, update UI with the signed-in user's information
-//                            Log.d(TAG, "createUserWithEmail:success");
-//                            FirebaseUser user = firebaseAuth.getCurrentUser();
-//                            updateUI(user);
+                            removeFragment();
                         } else {
-                            // If sign in fails, display a message to the user.
-//                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(getContext(), "Failed to create user.", Toast.LENGTH_LONG).show();
-//                            updateUI(null);
                         }
 
                     }
@@ -119,15 +131,86 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
     }
 
 
+    private void startNextActivity() {
+        if (firebaseAuth.getCurrentUser() != null) {
+//            SharedPreferences.Editor editor = sharedPrefs.edit();
+//            editor.putString("email", usernameET.getText().toString()).commit();
+//            editor.putString("password", passwordET.getText().toString()).commit();
+//            editor.commit();
+            createNewUserInDatabase(usernameET.getText().toString());
+            getActivity().finish();
+            startActivity(new Intent(getContext(), MainActivity.class));
+        }
+    }
 
-    public void hideFragment() {
+
+    private void createNewUserInDatabase(String email) {
+        User user = new User(email);
+        if(firebaseAuth.getCurrentUser()!=null) {
+            database.child("users").child(firebaseAuth.getCurrentUser().getUid()).setValue(user);
+        }
+    }
+
+
+    public void removeFragment() {
         if (getFragmentManager().findFragmentById(R.id.fragment_container_login).isVisible()) {
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
-            ft.hide(getFragmentManager().findFragmentById(R.id.fragment_container_login));
+            ft.remove(getFragmentManager().findFragmentById(R.id.fragment_container_login));
             ft.commit();
             LoginActivity.mainLoginBtn.setEnabled(true);
 
         }
     }
+
+
+
+    private class LoadViewTask extends AsyncTask<Void, Integer, Void> {
+
+        @Override
+        protected void onCancelled() {
+            progressDialog.dismiss();
+        }
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = ProgressDialog.show(getActivity(), "Gemmer data",
+                    "Vent venligst...", false, false);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                synchronized (this) {
+                    createUser();
+                    int count = 0;
+
+                    // Checker om brugeren er null
+                    while(!checkUser()) {
+                        this.wait(500);
+
+                        count++;
+                        if(count >= 200) {
+                            loadViewTask.cancel(true);
+                            loadViewTask = null;
+                        }
+                    }
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+//
+            return null;
+        }
+
+        // Efter ventetid
+        @Override
+        protected void onPostExecute(Void result) {
+            progressDialog.dismiss();
+            startNextActivity();
+        }
+    }
 }
+
+
+
