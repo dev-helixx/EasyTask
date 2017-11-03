@@ -1,6 +1,7 @@
 package com.easytask.easytask.frontend.views;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.easytask.easytask.R;
 import com.easytask.easytask.util.Validator;
@@ -33,8 +35,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button signupBtn;
     private EditText usernameTextbox, passwordTextbox;
     private FirebaseAuth firebaseAuth;
-
+    private ProgressDialog progressDialog;
     private Validator validator;
+    private String email, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,8 +85,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         {
 
 
-            String email = usernameTextbox.getText().toString();
-            String password = passwordTextbox.getText().toString();
+            email = usernameTextbox.getText().toString();
+            password = passwordTextbox.getText().toString();
 
             if(email.isEmpty() || password.isEmpty())
             {
@@ -94,26 +97,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 /* Validate both username and password */
                 if(validator.checkEmail(email) && validator.checkPassword(password))
                 {
-
-                    // TODO: create asynctask to show progress dialog while trying to authorize
-
-                    firebaseAuth.signInWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
-                                        Toast.makeText(LoginActivity.this, "LOGIN SUCCESS", Toast.LENGTH_SHORT).show();
-
-                                        Intent mainscreen = new Intent(LoginActivity.this, MainActivity.class);
-                                        startActivity(mainscreen);
-                                    } else {
-                                        // If sign in fails, display a message to the user.
-                                        Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-
+                    attemptLogin();
                 }
                 else
                 {
@@ -138,6 +122,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    public void attemptLogin() {
+        progressDialog = ProgressDialog.show(this, "Logger ind", "Vent venligst", false, false);
+
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Toast.makeText(LoginActivity.this, "LOGIN SUCCESS", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+
+                            Intent mainscreen = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(mainscreen);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                        }
+                    }
+                });
+    }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
 
@@ -160,4 +168,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public boolean onTouch(View v, MotionEvent event) {
         return false;
     }
+
+
 }
