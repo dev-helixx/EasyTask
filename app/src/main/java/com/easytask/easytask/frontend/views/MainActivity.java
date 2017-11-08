@@ -31,10 +31,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private RecyclerView recyclerView;
-    private LinearLayout recyclerViewLayout;
-    private List<Task> tasks;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +39,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /* Initializes data to be displayed on the cards */
-        initializeCardViewData();
+        /* Inflates cardview fragment*/
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
+        ft.replace(R.id.fragment_container_main, new FindTasksFragment());
+        ft.addToBackStack(null);
+        ft.commit();
 
-        recyclerViewLayout = (LinearLayout) findViewById(R.id.recyclerviewLayout);
-
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
-        recyclerView.setHasFixedSize(true);
-
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(llm);
-
-        RVAdapter adapter = new RVAdapter(tasks);
-        recyclerView.setAdapter(adapter);
 
 
 
@@ -72,92 +62,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    // This method creates an ArrayList that has four Task objects
-    private void initializeCardViewData(){
-
-        tasks = new ArrayList<>();
-
-        tasks.add(new Task("Slå græs", "Jeg skal have slået min græsplæne"));
-        tasks.add(new Task("Vaske bil", "Min bil skal vaskes!"));
-        tasks.add(new Task("Vaske terasse", "Skal vaskes hurtigt, er meget beskidt"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-
-
-    }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            if(recyclerViewLayout.getVisibility() == View.GONE) {
-                recyclerViewLayout.setVisibility(View.VISIBLE);
-
+//            if(recyclerViewLayout.getVisibility() == View.GONE) {
+//                recyclerViewLayout.setVisibility(View.VISIBLE);
+//
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container_main);
                 if(fragment != null)
                     getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-
-            }else {
+//
+//            }else {
                 super.onBackPressed();
-            }
+//            }
         }
 
     }
@@ -199,8 +119,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_mytasks) {
 
         } else if (id == R.id.nav_about) {
-
-            recyclerViewLayout.setVisibility(View.GONE);
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
