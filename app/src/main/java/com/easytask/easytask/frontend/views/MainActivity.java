@@ -97,7 +97,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_addTask) {
-            Toast.makeText(this, "Add something", Toast.LENGTH_SHORT).show();
+
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
+            ft.add(R.id.fragment_container_main, new CreateTaskFragment());
+            ft.addToBackStack(null);
+            ft.commit();
+//            Toast.makeText(this, "Add something", Toast.LENGTH_SHORT).show();
 
         }
 
