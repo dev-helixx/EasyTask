@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
         ft.replace(R.id.fragment_container_main, new FindTasksFragment());
-        ft.addToBackStack(null);
         ft.commit();
 
 
@@ -71,9 +70,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            if(recyclerViewLayout.getVisibility() == View.GONE) {
 //                recyclerViewLayout.setVisibility(View.VISIBLE);
 //
-                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container_main);
-                if(fragment != null)
-                    getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+//                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container_main);
+//                if(fragment != null)
+//                    getSupportFragmentManager().beginTransaction().remove(fragment).commit();
 //
 //            }else {
                 super.onBackPressed();
@@ -112,8 +111,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if(id == R.id.nav_findtasks) {
-            startActivity(new Intent(this, MainActivity.class));
-            this.finish();
+
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
+            ft.replace(R.id.fragment_container_main, new FindTasksFragment());
+            ft.addToBackStack(null);
+            ft.commit();
+
         } else if (id == R.id.nav_myprofile) {
 
         } else if (id == R.id.nav_mytasks) {
