@@ -34,12 +34,15 @@ import com.google.firebase.database.ValueEventListener;
 
 public class CreateTaskFragment extends Fragment implements View.OnClickListener {
 
+    private static final String TAG = "createtask";
+
     private Button return_btn, create_task_btn;
     private EditText titleET, descriptionET, paymentET;
     private String title, description, payment, userId, taskId;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference database;
     private SharedPreferences sharedPref;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -138,9 +141,8 @@ public class CreateTaskFragment extends Fragment implements View.OnClickListener
         if (getFragmentManager().findFragmentById(R.id.fragment_container_main).isVisible()) {
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
-            ft.hide(getFragmentManager().findFragmentById(R.id.fragment_container_main));
+            ft.remove(getFragmentManager().findFragmentById(R.id.fragment_container_main));
             ft.commit();
-            LoginActivity.mainLoginBtn.setEnabled(true);
 
         }
     }

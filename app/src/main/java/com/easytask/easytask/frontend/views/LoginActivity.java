@@ -5,7 +5,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -114,8 +117,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
-            ft.add(R.id.fragment_container_login, new CreateUserFragment());
-            ft.addToBackStack(null);
+            ft.replace(R.id.fragment_container_login, new CreateUserFragment(), "createuserfragment");
             ft.commit();
 
             mainLoginBtn.setEnabled(false);
@@ -169,6 +171,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         return false;
+    }
+
+
+
+    @Override
+    public void onBackPressed() {
+
+        Fragment cuf = getSupportFragmentManager().findFragmentByTag("createuserfragment");
+
+        if (cuf != null) {
+            mainLoginBtn.setEnabled(true);
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out)
+                    .remove(cuf)
+                    .commit();
+        }else {
+            super.onBackPressed();
+        }
+
     }
 
 

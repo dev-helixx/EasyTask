@@ -1,5 +1,6 @@
 package com.easytask.easytask.frontend.controllers;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.easytask.easytask.R;
+import com.easytask.easytask.frontend.views.DetailedTaskActivity;
 
 import java.util.List;
 
@@ -64,7 +66,13 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TaskViewHolder>{
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(),card_subject.getText(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent();
+                    intent.setClass(itemView.getContext(), DetailedTaskActivity.class);
+                    intent.putExtra("task_subject", card_subject.getText());
+                    intent.putExtra("task_description", card_description.getText());
+//                    intent.putExtra("task_image", R.id.detailed_task_image);
+                    itemView.getContext().startActivity(intent);
+//                    Toast.makeText(v.getContext(),card_subject.getText(), Toast.LENGTH_SHORT).show();
                 }
             });
 
