@@ -125,13 +125,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
-            ft.replace(R.id.fragment_container_main, new FindTasksFragment());
-            ft.addToBackStack(null);
+            ft.replace(R.id.fragment_container_main, new FindTasksFragment(), "findtasksfragment");
             ft.commit();
 
         } else if (id == R.id.nav_myprofile) {
 
         } else if (id == R.id.nav_mytasks) {
+
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
+            ft.replace(R.id.fragment_container_main, new MyTasksFragment());
+            ft.addToBackStack(null);
+            ft.commit();
 
         } else if (id == R.id.nav_about) {
 
