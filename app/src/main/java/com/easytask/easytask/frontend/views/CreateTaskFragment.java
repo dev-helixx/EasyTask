@@ -34,14 +34,11 @@ import com.google.firebase.database.ValueEventListener;
 
 public class CreateTaskFragment extends Fragment implements View.OnClickListener {
 
-    private static final String TAG = "createtask";
-
     private Button return_btn, create_task_btn;
     private EditText titleET, descriptionET, paymentET;
     private String title, description, payment, userId, taskId;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference database;
-    private SharedPreferences sharedPref;
 
 
     @Override
@@ -59,6 +56,7 @@ public class CreateTaskFragment extends Fragment implements View.OnClickListener
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance().getReference();
 
         titleET = (EditText) view.findViewById(R.id.create_task1_tbox);
         descriptionET = (EditText) view.findViewById(R.id.create_task2_tbox);
@@ -80,11 +78,25 @@ public class CreateTaskFragment extends Fragment implements View.OnClickListener
     }
 
     private void writeNewTask(String title, String description, String payment, String taskId, String userId) {
-        if(firebaseAuth.getCurrentUser()!=null) {
+        if(firebaseAuth.getCurrentUser()!= null) {
             database.child("users").child(userId).child("tasks").child(taskId).setValue(true);
-            database.child("tasks").child(taskId).setValue(title);
-            database.child("tasks").child(taskId).setValue(description);
-            database.child("tasks").child(taskId).setValue(payment);
+            database.child("tasks").child(taskId).child("title").setValue(title);
+            database.child("tasks").child(taskId).child("description").setValue(description);
+            database.child("tasks").child(taskId).child("payment").setValue(payment,  new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                    if (databaseError != null) {
+                        Toast.makeText(getContext(), "Failed to create task", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Success!", Toast.LENGTH_SHORT).show();
+                        hideFragment();
+
+                    }
+                }
+            });
+
+
+
         }
     }
 
@@ -103,12 +115,14 @@ public class CreateTaskFragment extends Fragment implements View.OnClickListener
             if(firebaseAuth.getCurrentUser() == null){
                 Intent intent1 = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent1);
+                getActivity().finish();
             }
             else {
                 userId = firebaseAuth.getCurrentUser().getUid();
             }
 
             database.addListenerForSingleValueEvent(new ValueEventListener() {
+
 
 
                 @Override
@@ -125,10 +139,9 @@ public class CreateTaskFragment extends Fragment implements View.OnClickListener
                 }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
+
                 }
             });
-
-            //Toast.makeText(getContext(), "Passwords does not match!", Toast.LENGTH_LONG).show();
 
         }
     }
