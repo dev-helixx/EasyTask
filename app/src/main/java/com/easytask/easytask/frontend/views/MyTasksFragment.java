@@ -92,13 +92,15 @@ public class MyTasksFragment extends Fragment {
 
                                 if(userTasks.getKey().equals(tasks.getKey())) {
                                     // In this if statement, add all relevant information to my tasks
-                                    
+
+                                    subjectArray.add("Task ID " + tasks.getKey());
+                                    descriptionArray.add("Beskrivelse af opgaven med ID " + tasks.getKey());
 
                                 }
                             }
                         }
 
-                        LVAdapter myTasksAdapter = new LVAdapter(getActivity(), subjectArray);
+                        LVAdapter myTasksAdapter = new LVAdapter(getActivity(), subjectArray, descriptionArray);
                         my_tasks_listview = (ListView) view.findViewById(R.id.my_tasks_listview);
                         my_tasks_listview.setAdapter(myTasksAdapter);
 

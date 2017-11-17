@@ -30,13 +30,13 @@ public class LVAdapter extends ArrayAdapter {
     //to store the list of countries
     private List<String> descriptionArray;
 
-    public LVAdapter(Activity context, List<String> subjectArrayParam/*, List<String> descriptionArrayParam, Integer[] imageIDArrayParam*/){
+    public LVAdapter(Activity context, List<String> subjectArrayParam, List<String> descriptionArrayParam/*, Integer[] imageIDArrayParam*/){
         super(context, R.layout.listview_row_layout , subjectArrayParam);
 
         this.context = context;
 //        this.imageIDarray = imageIDArrayParam;
         this.subjectArray = subjectArrayParam;
-//        this.descriptionArray = descriptionArrayParam;
+        this.descriptionArray = descriptionArrayParam;
 
     }
 
@@ -46,12 +46,12 @@ public class LVAdapter extends ArrayAdapter {
 
         //this code gets references to objects in the listview_row.xml file
         TextView subjectField = (TextView) rowView.findViewById(R.id.my_tasks_subject);
-//        TextView descriptionField = (TextView) rowView.findViewById(R.id.my_tasks_description);
+        TextView descriptionField = (TextView) rowView.findViewById(R.id.my_tasks_description);
 //        ImageView imageView = (ImageView) rowView.findViewById(R.id.my_tasks_imageview);
 
         //this code sets the values of the objects to values from the arrays
         subjectField.setText(subjectArray.get(position));
-//        descriptionField.setText(descriptionArray.get(position));
+        descriptionField.setText(descriptionArray.get(position));
 //        imageView.setImageResource(imageIDarray[position]);
 
         return rowView;
