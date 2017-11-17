@@ -84,11 +84,12 @@ public class MyTasksFragment extends Fragment {
                     @Override
                     public void onDataChange(DataSnapshot snap2) {
 
+                        // tasks indeholder alle tasks IDs
                         for (DataSnapshot tasks : snap1.getChildren()) {
-                            // tasks indeholder alle tasks IDs
 
+                            // userTasks indeholder alle brugerens taskIDs
                             for (DataSnapshot userTasks : snap2.getChildren()) {
-                                // userTasks indeholder alle brugerens taskIDs
+
                                 if(userTasks.getKey().equals(tasks.getKey())) {
                                     // In this if statement, add all relevant information to my tasks
                                     
