@@ -29,7 +29,7 @@ import java.util.List;
 public class MyTasksFragment extends Fragment {
 
     private ListView my_tasks_listview;
-    private DatabaseReference userRef, taskRef;
+    private DatabaseReference userRef, taskRef, test;
     private FirebaseAuth firebaseAuth;
     private String userId;
     private List<String> subjectArray, descriptionArray;
@@ -91,9 +91,10 @@ public class MyTasksFragment extends Fragment {
                             for (DataSnapshot userTasks : snap2.getChildren()) {
 
                                 if(userTasks.getKey().equals(tasks.getKey())) {
-                                    // In this if statement, add all relevant information to my tasks
 
-                                    subjectArray.add("Task ID " + tasks.getKey());
+                                    // TODO der skal findes en måde at få referencer til værdierne i en task
+                                    // Nedenfor virker ikke endnu, får kun fat i task ID'erne
+                                    subjectArray.add(tasks.child(tasks.getKey()).getKey());
                                     descriptionArray.add("Beskrivelse af opgaven med ID " + tasks.getKey());
 
                                 }
