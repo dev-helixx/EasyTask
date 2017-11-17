@@ -77,36 +77,24 @@ public class MyTasksFragment extends Fragment {
 
 
             @Override
-            public void onDataChange(final DataSnapshot snap) {
+            public void onDataChange(final DataSnapshot snap1) {
 
 
                 userRef.child("users").child(userId).child("tasks").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                    public void onDataChange(DataSnapshot snap2) {
 
-                        for (DataSnapshot tasks : snap.getChildren()) {
-                            // tasks henter alle tasks IDs
+                        for (DataSnapshot tasks : snap1.getChildren()) {
+                            // tasks indeholder alle tasks IDs
 
-                            for (DataSnapshot userTasks : dataSnapshot.getChildren()) {
-                                // userTasks henter alle brugerens taskIDs
+                            for (DataSnapshot userTasks : snap2.getChildren()) {
+                                // userTasks indeholder alle brugerens taskIDs
                                 if(userTasks.getKey().equals(tasks.getKey())) {
-                                    subjectArray.add(tasks.getKey());
+                                    // In this if statement, add all relevant information to my tasks
+                                    
+
                                 }
                             }
-
-
-
-
-
-
-//                    for (DataSnapshot snapshot2 : snapshot.getChildren()) {
-//
-//                        for (DataSnapshot snapshot3 : snapshot2.getChildren()) {
-//
-//                            subjectArray.add(snapshot3.getKey());
-//
-//                        }
-//
                         }
 
                         LVAdapter myTasksAdapter = new LVAdapter(getActivity(), subjectArray);
