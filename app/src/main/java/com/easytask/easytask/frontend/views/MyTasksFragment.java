@@ -29,7 +29,7 @@ import java.util.List;
 public class MyTasksFragment extends Fragment {
 
     private ListView my_tasks_listview;
-    private DatabaseReference database;
+    private DatabaseReference userRef, taskRef;
     private FirebaseAuth firebaseAuth;
     private String userId;
     private List<String> subjectArray, descriptionArray;
@@ -62,7 +62,8 @@ public class MyTasksFragment extends Fragment {
 
 
         firebaseAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance().getReference();
+        userRef = FirebaseDatabase.getInstance().getReference();
+        taskRef = FirebaseDatabase.getInstance().getReference();
 
         if(firebaseAuth.getCurrentUser() == null){
             getActivity().finish();
@@ -72,34 +73,58 @@ public class MyTasksFragment extends Fragment {
             userId = firebaseAuth.getCurrentUser().getUid();
         }
 
-        database.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+        taskRef.child("tasks").addListenerForSingleValueEvent(new ValueEventListener() {
 
 
             @Override
-            public void onDataChange(DataSnapshot snap) {
+            public void onDataChange(final DataSnapshot snap) {
 
 
-                for (DataSnapshot snapshot : snap.getChildren()) {
+                userRef.child("users").child(userId).child("tasks").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    for (DataSnapshot snapshot2 : snapshot.getChildren()) {
+                        for (DataSnapshot tasks : snap.getChildren()) {
+                            // tasks henter alle tasks IDs
 
-                        for (DataSnapshot snapshot3 : snapshot2.getChildren()) {
+                            for (DataSnapshot userTasks : dataSnapshot.getChildren()) {
+                                // userTasks henter alle brugerens taskIDs
+                                if(userTasks.getKey().equals(tasks.getKey())) {
+                                    subjectArray.add(tasks.getKey());
+                                }
+                            }
 
-                            subjectArray.add(snapshot3.getKey());
 
+
+
+
+
+//                    for (DataSnapshot snapshot2 : snapshot.getChildren()) {
+//
+//                        for (DataSnapshot snapshot3 : snapshot2.getChildren()) {
+//
+//                            subjectArray.add(snapshot3.getKey());
+//
+//                        }
+//
                         }
+
+                        LVAdapter myTasksAdapter = new LVAdapter(getActivity(), subjectArray);
+                        my_tasks_listview = (ListView) view.findViewById(R.id.my_tasks_listview);
+                        my_tasks_listview.setAdapter(myTasksAdapter);
+
+                        progressDialog.dismiss();
+
+
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
                     }
 
+                });
 
 
-                }
-
-                LVAdapter myTasksAdapter = new LVAdapter(getActivity(), subjectArray);
-                my_tasks_listview = (ListView) view.findViewById(R.id.my_tasks_listview);
-                my_tasks_listview.setAdapter(myTasksAdapter);
-
-                progressDialog.dismiss();
 
 
             }
