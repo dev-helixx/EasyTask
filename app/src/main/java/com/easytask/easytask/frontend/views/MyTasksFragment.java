@@ -94,8 +94,8 @@ public class MyTasksFragment extends Fragment {
 
                                     // TODO der skal findes en måde at få referencer til værdierne i en task
                                     // Nedenfor virker ikke endnu, får kun fat i task ID'erne
-                                    subjectArray.add(tasks.child(tasks.getKey()).getKey());
-                                    descriptionArray.add("Beskrivelse af opgaven med ID " + tasks.getKey());
+                                    subjectArray.add(tasks.child("title").getValue().toString());
+                                    descriptionArray.add("Beskrivelse af opgaven med ID " + tasks.child("description").getValue().toString());
 
                                 }
                             }

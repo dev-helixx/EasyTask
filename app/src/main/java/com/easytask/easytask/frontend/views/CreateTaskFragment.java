@@ -80,7 +80,7 @@ public class CreateTaskFragment extends Fragment implements View.OnClickListener
     private void writeNewTask(String title, String description, String payment, String taskId, String userId) {
         if(firebaseAuth.getCurrentUser()!= null) {
             taskId = database.child("tasks").push().getKey();
-            database.child("users").child(userId).child("tasks").child(taskId).setValue(taskId);
+            database.child("users").child(userId).child("tasks").child(taskId).setValue(true);
             database.child("tasks").child(taskId).child("title").setValue(title);
             database.child("tasks").child(taskId).child("description").setValue(description);
             database.child("tasks").child(taskId).child("payment").setValue(payment,  new DatabaseReference.CompletionListener() {
