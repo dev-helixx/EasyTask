@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import com.easytask.easytask.R;
 
+/**
+ * Created by Silas on 05-11-2017.
+ */
+
 public class AboutFragment extends Fragment {
 
     TextView about_label;

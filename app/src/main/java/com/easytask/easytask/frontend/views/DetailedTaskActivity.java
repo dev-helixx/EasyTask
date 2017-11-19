@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import com.easytask.easytask.R;
 
+/**
+ * Created by Silas on 13-11-2017.
+ */
+
 public class DetailedTaskActivity extends AppCompatActivity {
 
 

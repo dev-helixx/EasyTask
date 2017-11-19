@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Created by Silas on 15-11-2017.
  */
 public class MyTasksFragment extends Fragment {
 
@@ -51,15 +51,6 @@ public class MyTasksFragment extends Fragment {
 
         subjectArray = new ArrayList<String>();
         descriptionArray = new ArrayList<String>();
-
-//        subjectArray.add("Test1");
-//        subjectArray.add("Test2");
-//        subjectArray.add("Test3");
-//
-//        descriptionArray.add("Des1");
-//        descriptionArray.add("Des2");
-//        descriptionArray.add("Des3");
-
 
         firebaseAuth = FirebaseAuth.getInstance();
         userRef = FirebaseDatabase.getInstance().getReference();
@@ -116,18 +107,12 @@ public class MyTasksFragment extends Fragment {
 
                 });
 
-
-
-
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-
-
-
 
     }
 

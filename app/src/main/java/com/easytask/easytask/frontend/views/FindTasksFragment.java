@@ -19,8 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Created by Silas on 05-11-2017.
  */
+
 public class FindTasksFragment extends Fragment {
 
     private RecyclerView recyclerView;
