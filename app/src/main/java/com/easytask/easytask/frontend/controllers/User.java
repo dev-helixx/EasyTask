@@ -10,11 +10,13 @@ import java.util.List;
 public class  User {
 
     private String email;
+    private boolean taskCreator;
 //    private String date;
 //    private int avatar;
 
-    public User(String email){
+    public User(String email, boolean taskCreator){
         this.email = email;
+        this.taskCreator = taskCreator;
 //        this.date = date;
 //        this.avatar = avatar;
     }
@@ -22,10 +24,10 @@ public class  User {
     public String getEmail() {
         return email;
     }
+    public void setEmail(String name) {this.email = name;}
 
-    public void setEmail(String name) {
-        this.email = name;
-    }
+    public boolean getIsTaskCreator() {return taskCreator;}
+    public void setIsTaskCreator(boolean taskCreator) {this.taskCreator = taskCreator;}
 
 //    public String getDate() {
 //        return date;

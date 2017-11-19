@@ -124,7 +124,7 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
 
 
     public void createUser() {
-        /* Add firebase method to create new user*/
+        /* firebase method to create new user*/
 
         firebaseAuth.createUserWithEmailAndPassword(username, password)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
@@ -150,15 +150,19 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
 //            editor.putString("email", usernameET.getText().toString()).commit();
 //            editor.putString("password", passwordET.getText().toString()).commit();
 //            editor.commit();
-            createNewUserInDatabase(usernameET.getText().toString());
+            if(task_creator.isChecked()) {
+                createNewUserInDatabase(usernameET.getText().toString(), true);
+            }else {
+                createNewUserInDatabase(usernameET.getText().toString(), false);
+            }
             getActivity().finish();
             startActivity(new Intent(getContext(), MainActivity.class));
         }
     }
 
 
-    private void createNewUserInDatabase(String email) {
-        User user = new User(email);
+    private void createNewUserInDatabase(String email, boolean taskCreator) {
+        User user = new User(email, taskCreator);
         if(firebaseAuth.getCurrentUser()!=null) {
             database.child("users").child(firebaseAuth.getCurrentUser().getUid()).setValue(user);
         }

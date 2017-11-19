@@ -100,9 +100,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 /* Validate both username and password */
                 if(validator.checkEmail(email) && validator.checkPassword(password))
                 {
-                    Intent mainscreen = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(mainscreen);
-//                    attemptLogin();
+//                    Intent mainscreen = new Intent(LoginActivity.this, MainActivity.class);
+//                    startActivity(mainscreen);
+                    attemptLogin();
                 }
                 else
                 {

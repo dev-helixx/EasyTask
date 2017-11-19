@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.easytask.easytask.R;
 import com.easytask.easytask.frontend.controllers.LVAdapter;
@@ -71,6 +72,8 @@ public class FindTasksFragment extends Fragment {
         if(firebaseAuth.getCurrentUser() == null){
             getActivity().finish();
             startActivity(new Intent(getActivity(), LoginActivity.class));
+        }else {
+            Toast.makeText(getActivity(), "User is null", Toast.LENGTH_SHORT).show();
         }
 
         taskRef.child("tasks").addListenerForSingleValueEvent(new ValueEventListener() {
