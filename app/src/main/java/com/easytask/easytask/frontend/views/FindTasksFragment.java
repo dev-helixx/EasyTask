@@ -1,6 +1,8 @@
 package com.easytask.easytask.frontend.views;
 
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,11 +11,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.easytask.easytask.R;
+import com.easytask.easytask.frontend.controllers.LVAdapter;
 import com.easytask.easytask.frontend.controllers.RVAdapter;
 import com.easytask.easytask.frontend.controllers.Task;
-import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +34,10 @@ import java.util.List;
 public class FindTasksFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private LinearLayout recyclerViewLayout;
-    private List<Task> tasks;
+    private List<Task> task_list;
+    private ProgressDialog progressDialog;
+    private DatabaseReference taskRef;
+    private FirebaseAuth firebaseAuth;
 
 
 
@@ -40,44 +51,55 @@ public class FindTasksFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        initializeCardViewData();
-
-        recyclerViewLayout = (LinearLayout) view.findViewById(R.id.recyclerviewLayout);
+        progressDialog = ProgressDialog.show(getContext(), "Fetching all available tasks", "Please wait", false, false);
 
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
 
-        LinearLayoutManager llm = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(llm);
-
-        RVAdapter adapter = new RVAdapter(tasks);
-        recyclerView.setAdapter(adapter);
-    }
-
-    private void initializeCardViewData(){
-
-        tasks = new ArrayList<>();
-
-        tasks.add(new Task("Slå græs", "Jeg skal have slået min græsplæne"));
-        tasks.add(new Task("Vaske bil", "Min bil skal vaskes!"));
-        tasks.add(new Task("Vaske terasse", "Skal vaskes hurtigt, er meget beskidt"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-        tasks.add(new Task("Hjælpe med indkøb", "Har ikke tid til at gøre det selv"));
-
+        initializeAvailableTasks();
 
 
     }
 
+    private void initializeAvailableTasks(){
+
+        task_list = new ArrayList<>();
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        taskRef = FirebaseDatabase.getInstance().getReference();
+
+        if(firebaseAuth.getCurrentUser() == null){
+            getActivity().finish();
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+        }
+
+        taskRef.child("tasks").addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+            @Override
+            public void onDataChange(DataSnapshot snap1) {
+
+                // tasks indeholder alle tasks IDs
+                for (DataSnapshot tasks : snap1.getChildren()) {
+
+                    task_list.add(new Task(tasks.child("title").getValue().toString(), tasks.child("description").getValue().toString()));
+
+                }
+
+                LinearLayoutManager llm = new LinearLayoutManager(getContext());
+                recyclerView.setLayoutManager(llm);
+                RVAdapter adapter = new RVAdapter(task_list);
+                recyclerView.setAdapter(adapter);
+
+                progressDialog.dismiss();
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 
 }
