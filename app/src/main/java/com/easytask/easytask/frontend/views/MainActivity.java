@@ -69,12 +69,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
 
             Fragment ctf = getSupportFragmentManager().findFragmentByTag("createtaskfragment");
+            Fragment ftf = getSupportFragmentManager().findFragmentByTag("findtasksfragment");
+            Fragment af = getSupportFragmentManager().findFragmentByTag("aboutfragment");
 
             if (ctf != null) {
                 getSupportFragmentManager()
                         .beginTransaction()
                         .setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out)
                         .remove(ctf)
+                        .commit();
+            }
+            else if( ftf != null) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out)
+                        .remove(ftf)
+                        .commit();
+            }
+            else if( af != null) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out)
+                        .remove(af)
                         .commit();
             }else {
                 super.onBackPressed();
@@ -134,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
-            ft.replace(R.id.fragment_container_main, new MyTasksFragment());
+            ft.replace(R.id.fragment_container_main, new MyTasksFragment(), "findtasksfragment");
             ft.addToBackStack(null);
             ft.commit();
 
@@ -142,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
-            ft.replace(R.id.fragment_container_main, new AboutFragment());
+            ft.replace(R.id.fragment_container_main, new AboutFragment(), "aboutfragment");
             ft.addToBackStack(null);
             ft.commit();
 
