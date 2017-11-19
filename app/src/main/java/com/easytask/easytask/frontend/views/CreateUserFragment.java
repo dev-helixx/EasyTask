@@ -15,7 +15,10 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.easytask.easytask.R;
@@ -31,7 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by Silas on 27-09-2017.
  */
 
-public class CreateUserFragment extends Fragment implements View.OnClickListener {
+public class CreateUserFragment extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private Button return_btn, create_user_btn;
     private EditText usernameET, passwordET, confirmPassET;
@@ -41,6 +44,7 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
     private ProgressDialog progressDialog;
     private LoadViewTask loadViewTask;
     private SharedPreferences sharedPrefs;
+    private CheckBox task_doer, task_creator;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,7 +67,8 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
         usernameET = (EditText) view.findViewById(R.id.create_email_tbox);
         passwordET = (EditText) view.findViewById(R.id.create_pwd1_tbox);
         confirmPassET = (EditText) view.findViewById(R.id.create_pwd2_tbox);
-
+        task_creator = (CheckBox) view.findViewById(R.id.task_creator_checkbox);
+        task_doer = (CheckBox) view.findViewById(R.id.task_doer_checkbox);
 
         return_btn = (Button) view.findViewById(R.id.create_return_btn);
         create_user_btn = (Button) view.findViewById(R.id.create_user_btn);
@@ -72,6 +77,9 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
         return_btn.setOnClickListener(this);
         create_user_btn.setOnClickListener(this);
 
+        // Radio button listeners
+        task_doer.setOnCheckedChangeListener(this);
+        task_creator.setOnCheckedChangeListener(this);
 
         /* Hides keyboard when user clicks on the layout */
         InputMethodManager inputManager = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -81,8 +89,17 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
 
 
 
-    private boolean checkUser() {
-        return firebaseAuth.getCurrentUser() != null;
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            if (buttonView.getId() == R.id.task_doer_checkbox) {
+                task_creator.setChecked(false);
+            }
+            if (buttonView.getId() == R.id.task_creator_checkbox) {
+                task_doer.setChecked(false);
+            }
+        }
     }
 
     @Override
@@ -92,19 +109,15 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
         }else if(view == create_user_btn ) {
 
             username = usernameET.getText().toString();
-            if(passwordET.getText().toString().equals(confirmPassET.getText().toString())){
+            if (passwordET.getText().toString().equals(confirmPassET.getText().toString())) {
 //                Toast.makeText(getContext(), "Passwords match", Toast.LENGTH_SHORT).show();
                 password = passwordET.getText().toString();
 
                 loadViewTask = new LoadViewTask();
                 loadViewTask.execute();
-            }
-            else{
+            } else {
                 Toast.makeText(getContext(), "Passwords does not match!", Toast.LENGTH_LONG).show();
             }
-
-
-
         }
     }
 
@@ -210,6 +223,11 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
             startNextActivity();
         }
     }
+
+    private boolean checkUser() {
+        return firebaseAuth.getCurrentUser() != null;
+    }
+
 }
 
 
