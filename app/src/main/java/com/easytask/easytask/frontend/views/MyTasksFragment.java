@@ -49,8 +49,8 @@ public class MyTasksFragment extends Fragment {
 
         progressDialog = ProgressDialog.show(getContext(), "Fetching all of your tasks", "Please wait", false, false);
 
-        subjectArray = new ArrayList<String>();
-        descriptionArray = new ArrayList<String>();
+        subjectArray = new ArrayList<>();
+        descriptionArray = new ArrayList<>();
 
         firebaseAuth = FirebaseAuth.getInstance();
         userRef = FirebaseDatabase.getInstance().getReference();
@@ -62,6 +62,7 @@ public class MyTasksFragment extends Fragment {
         }
         else {
             userId = firebaseAuth.getCurrentUser().getUid();
+            Toast.makeText(getActivity(), userId, Toast.LENGTH_SHORT).show();
         }
 
         taskRef.child("tasks").addListenerForSingleValueEvent(new ValueEventListener() {

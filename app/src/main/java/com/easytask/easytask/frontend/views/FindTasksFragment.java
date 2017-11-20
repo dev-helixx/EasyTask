@@ -39,6 +39,7 @@ public class FindTasksFragment extends Fragment {
     private ProgressDialog progressDialog;
     private DatabaseReference taskRef;
     private FirebaseAuth firebaseAuth;
+    private String userId;
 
 
 
@@ -73,7 +74,8 @@ public class FindTasksFragment extends Fragment {
             getActivity().finish();
             startActivity(new Intent(getActivity(), LoginActivity.class));
         }else {
-            Toast.makeText(getActivity(), "User is null", Toast.LENGTH_SHORT).show();
+            userId = firebaseAuth.getCurrentUser().getUid();
+//            Toast.makeText(getActivity(), "User is not null", Toast.LENGTH_SHORT).show();
         }
 
         taskRef.child("tasks").addListenerForSingleValueEvent(new ValueEventListener() {
