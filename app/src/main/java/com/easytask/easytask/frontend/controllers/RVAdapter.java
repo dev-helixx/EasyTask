@@ -39,7 +39,12 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TaskViewHolder>{
 
 
         holder.card_subject.setText(tasks.get(i).card_subject);
-        holder.card_description.setText(tasks.get(i).card_description.substring(0,10) + "...");
+        if(tasks.get(i).card_description.length() > 25) {
+            holder.card_description.setText(tasks.get(i).card_description.substring(0,25) + "...");
+        }else {
+            holder.card_description.setText(tasks.get(i).card_description);
+        }
+
     }
 
     @Override
