@@ -85,7 +85,7 @@ public class MyTasksFragment extends Fragment {
                                 if(userTasks.getKey().equals(tasks.getKey())) {
 
                                     subjectArray.add(tasks.child("title").getValue().toString());
-                                    descriptionArray.add("Beskrivelse af opgaven med ID " + tasks.child("description").getValue().toString());
+                                    descriptionArray.add(tasks.child("description").getValue().toString());
 
                                 }
                             }
