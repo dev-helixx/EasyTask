@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.easytask.easytask.R;
@@ -123,7 +122,7 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
 
 
 
-    public void createUser() {
+    public void createFirebaseAuthUser() {
         /* firebase method to create new user*/
 
         firebaseAuth.createUserWithEmailAndPassword(username, password)
@@ -131,11 +130,10 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getContext(), "User created!!", Toast.LENGTH_LONG).show();
-
-                            removeFragment();
+//                            Toast.makeText(getContext(), "User created!!", Toast.LENGTH_LONG).show();
+                            startNextActivity();
                         } else {
-                            Toast.makeText(getContext(), "Failed to create user.", Toast.LENGTH_LONG).show();
+//                            Toast.makeText(getContext(), "Failed to create user.", Toast.LENGTH_LONG).show();
                         }
 
                     }
@@ -155,7 +153,7 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
             }else {
                 createNewUserInDatabase(usernameET.getText().toString(), false);
             }
-            getActivity().finish();
+            removeFragment();
             startActivity(new Intent(getContext(), MainActivity.class));
         }
     }
@@ -163,7 +161,7 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
 
     private void createNewUserInDatabase(String email, boolean taskCreator) {
         User user = new User(email, taskCreator);
-        if(firebaseAuth.getCurrentUser()!=null) {
+        if(firebaseAuth.getCurrentUser()!= null) {
             database.child("users").child(firebaseAuth.getCurrentUser().getUid()).setValue(user);
         }
     }
@@ -199,7 +197,7 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
         protected Void doInBackground(Void... params) {
             try {
                 synchronized (this) {
-                    createUser();
+                    createFirebaseAuthUser();
                     int count = 0;
 
                     // Checker om brugeren er null
@@ -224,7 +222,7 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
         @Override
         protected void onPostExecute(Void result) {
             progressDialog.dismiss();
-            startNextActivity();
+//            startNextActivity();
         }
     }
 
