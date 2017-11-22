@@ -65,7 +65,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:background="@color/blåFarve5"
-                android:text="Log ind" />
+                android:text="@string/login_btn" />
 
             <Button
                 android:id="@+id/signup_button"
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="Opret bruger" />
+                android:text="@string/login_create_user_btn" />
 
 
         </LinearLayout>

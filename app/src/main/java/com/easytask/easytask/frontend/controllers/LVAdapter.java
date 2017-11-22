@@ -21,13 +21,10 @@ public class LVAdapter extends ArrayAdapter {
     //to reference the Activity
     private Activity context;
 
-    //to store the animal images
 //    private Integer[] imageIDarray;
 
-    //to store the list of countries
     private List<String> subjectArray;
 
-    //to store the list of countries
     private List<String> descriptionArray;
 
     public LVAdapter(Activity context, List<String> subjectArrayParam, List<String> descriptionArrayParam/*, Integer[] imageIDArrayParam*/){

@@ -16,11 +16,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.easytask.easytask.R;
 import com.easytask.easytask.frontend.controllers.Task;
 import com.easytask.easytask.frontend.controllers.RVAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
+    private TextView current_user;
+    private FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +44,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        if(firebaseAuth.getCurrentUser() == null) {
+            this.finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
 
         /* Inflates cardview fragment*/
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -56,7 +67,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        current_user = (TextView) headerView.findViewById(R.id.current_user_email_lbl);
+        current_user.setText(firebaseAuth.getCurrentUser().getEmail());
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
 
 
     }

@@ -1,11 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- All texts in the app -->
+
     <string name="app_name">EasyTask</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_find">Find Opgaver</string>
+    <string name="navigation_drawer_myprofile">Min Profil</string>
+    <string name="navigation_drawer_mytasks">Mine Opgaver</string>
+    <string name="navigation_drawer_about">Om os</string>
+    <string name="navigation_drawer_logout">Log ud</string>
     <string name="action_settings">Indstillinger</string>
 
-    <string name="loginBtn">Log ind</string>
-    <string name="create_user">Opret bruger</string>
+    <string name="login_btn">Log ind</string>
+    <string name="login_create_user_btn">Opret Bruger</string>
+    <string name="email">Email</string>
+    <string name="create_user_title">Opret Bruger</string>
+    <string name="create_user_2nd_pass">Gentag Password</string>
+    <string name="create_user_type_title">Du kommer til at:</string>
+    <string name="create_user_type_1">Udføre opgaver</string>
+    <string name="create_user_type_2">Oprette opgaver</string>
+    <string name="create_user_return_btn">Vend tilbage til loginskærmen</string>
+    <string name="login_progressbar_title">Logger ind</string>
+    <string name="login_progressbar_subtitle">Vent venligst</string>
+    <string name="create_task_title">Opret Opgave</string>
+    <string name="create_task_subject">Emne</string>
+    <string name="create_task_description">Beskrivelse</string>
+    <string name="create_task_payment">Betaling</string>
+    <string name="create_task_createbtn">Opret</string>
+    <string name="create_task_returnbtn">Vend tilbage til hovedskærmen</string>
 
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
