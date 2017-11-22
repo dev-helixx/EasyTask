@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,17 +13,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.easytask.easytask.R;
-import com.easytask.easytask.frontend.controllers.Task;
-import com.easytask.easytask.frontend.controllers.RVAdapter;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by Silas on 27-09-2017.
@@ -36,6 +32,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private TextView current_user;
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference database;
+    private boolean isTaskCreator;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +42,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle("Alle Opgaver");
 
         firebaseAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance().getReference();
 
-        if(firebaseAuth.getCurrentUser() == null) {
-            this.finish();
-            startActivity(new Intent(this, LoginActivity.class));
-        }
+
+        /* Checks if user is a task creator or just task do'er*/
+        checkUser();
+
+
 
         /* Inflates cardview fragment*/
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -121,6 +123,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        MenuItem createTaskActionButton = menu.findItem(R.id.action_addTask);
+
+        if(!isTaskCreator) {
+            createTaskActionButton.setVisible(false);
+        }else {
+            createTaskActionButton.setVisible(true);
+        }
         return true;
     }
 
@@ -189,6 +199,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+
+    private void checkUser() {
+        if(firebaseAuth.getCurrentUser() == null) {
+            this.finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }else {
+
+            database.child("users").child(firebaseAuth.getCurrentUser().getUid()).child("isTaskCreator").addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+                @Override
+                public void onDataChange(DataSnapshot snap) {
+
+                    isTaskCreator = (boolean)snap.getValue();
+
+                    // Calls oncreateOptionsmenu and hides create button if user is not creator
+                    invalidateOptionsMenu();
+
+                    // Hides "My Tasks" if user is not creator
+                    if(!isTaskCreator) {
+                        navigationView = (NavigationView) findViewById(R.id.nav_view);
+                        Menu nav_Menu = navigationView.getMenu();
+                        nav_Menu.findItem(R.id.nav_mytasks).setVisible(false);
+                    }
+
+
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
 
 
 }

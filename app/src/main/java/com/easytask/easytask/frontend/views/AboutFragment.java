@@ -29,6 +29,8 @@ public class AboutFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
+        getActivity().setTitle("Om os");
+
         about_label = (TextView) view.findViewById(R.id.about_label);
 
         about_label.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +

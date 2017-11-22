@@ -47,6 +47,8 @@ public class MyTasksFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
 
+        getActivity().setTitle("Mine Opgaver");
+
         progressDialog = ProgressDialog.show(getContext(), "Fetching all of your tasks", "Please wait", false, false);
 
         subjectArray = new ArrayList<>();

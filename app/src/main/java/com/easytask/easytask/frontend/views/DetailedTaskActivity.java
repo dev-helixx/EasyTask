@@ -33,7 +33,7 @@ public class DetailedTaskActivity extends AppCompatActivity {
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Task Overview");
+        getSupportActionBar().setTitle("Opgave detaljer");
 
 
 

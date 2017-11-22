@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +54,9 @@ public class FindTasksFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        progressDialog = ProgressDialog.show(getContext(), "Fetching all available tasks", "Please wait", false, false);
+        getActivity().setTitle("Alle Opgaver");
+
+        progressDialog = ProgressDialog.show(getContext(), "Henter alle tilgængelige opgaver", "Vent venligst", false, false);
 
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
