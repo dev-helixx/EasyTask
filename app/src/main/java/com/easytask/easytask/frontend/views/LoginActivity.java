@@ -56,8 +56,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         signupBtn = (Button)findViewById(R.id.signup_button);
         usernameTextbox = (EditText)findViewById(R.id.username_textbox);
         passwordTextbox = (EditText)findViewById(R.id.password_textbox);
-        usernameTextbox.setText("test@test.com");
-        passwordTextbox.setText("test1234");
+//        usernameTextbox.setText("test@test.com");
+//        passwordTextbox.setText("test1234");
 
         validator = new Validator();
         firebaseAuth = FirebaseAuth.getInstance();

@@ -5,12 +5,28 @@
     <string name="app_name">EasyTask</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_find">Find tasks</string>
+    <string name="navigation_drawer_myprofile">My profile</string>
     <string name="action_settings">Settings</string>
 
-    <string name="loginBtn">Log in</string>
-    <string name="create_user">Create User</string>
-    <string name="create_user_description">Please fill out the fields below</string>
+    <string name="login_btn">Log in</string>
     <string name="email">Email</string>
+    <string name="create_user_title">Create User</string>
+    <string name="create_user_2nd_pass">Repeat Password</string>
+    <string name="create_user_type_title">You will be</string>
+    <string name="create_user_type_1">Doing tasks</string>
+    <string name="create_user_type_2">Creating tasks</string>
+    <string name="create_user_return_btn">Return to login screen</string>
+    <string name="login_progressbar_title">Logging in</string>
+    <string name="login_progressbar_subtitle">Please wait</string>
+
+
+
+
+
+
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
