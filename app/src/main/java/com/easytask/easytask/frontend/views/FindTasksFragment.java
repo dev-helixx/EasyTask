@@ -75,7 +75,7 @@ public class FindTasksFragment extends Fragment {
             startActivity(new Intent(getActivity(), LoginActivity.class));
         }else {
             userId = firebaseAuth.getCurrentUser().getUid();
-//            Toast.makeText(getActivity(), "User is not null", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), userId, Toast.LENGTH_SHORT).show();
         }
 
         taskRef.child("tasks").addListenerForSingleValueEvent(new ValueEventListener() {

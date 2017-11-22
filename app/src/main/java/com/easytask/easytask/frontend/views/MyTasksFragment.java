@@ -62,7 +62,7 @@ public class MyTasksFragment extends Fragment {
         }
         else {
             userId = firebaseAuth.getCurrentUser().getUid();
-            Toast.makeText(getActivity(), userId, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), userId, Toast.LENGTH_SHORT).show();
         }
 
         taskRef.child("tasks").addListenerForSingleValueEvent(new ValueEventListener() {

@@ -19,7 +19,8 @@ import java.util.List;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TaskViewHolder>{
 
-    List<Task> tasks;
+    private List<Task> tasks;
+    private static String description, subject;
 
     public RVAdapter(List<Task> tasks){
         this.tasks = tasks;
@@ -37,9 +38,16 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TaskViewHolder>{
     @Override
     public void onBindViewHolder(TaskViewHolder holder, int i) {
 
+        description = tasks.get(i).card_description;
+        subject = tasks.get(i).card_subject;
 
-        holder.card_subject.setText(tasks.get(i).card_subject);
-        holder.card_description.setText(tasks.get(i).card_description);
+        holder.card_subject.setText(subject);
+        if(description.length() > 25) {
+            holder.card_description.setText(description.substring(0,25) + "...");
+        }else {
+            holder.card_description.setText(description);
+        }
+
     }
 
     @Override
@@ -68,8 +76,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TaskViewHolder>{
                 public void onClick(View v) {
                     Intent intent = new Intent();
                     intent.setClass(itemView.getContext(), DetailedTaskActivity.class);
-                    intent.putExtra("task_subject", card_subject.getText());
-                    intent.putExtra("task_description", card_description.getText());
+                    intent.putExtra("task_subject", subject);
+                    intent.putExtra("task_description", description);
 //                    intent.putExtra("task_image", R.id.detailed_task_image);
                     itemView.getContext().startActivity(intent);
 //                    Toast.makeText(v.getContext(),card_subject.getText(), Toast.LENGTH_SHORT).show();
