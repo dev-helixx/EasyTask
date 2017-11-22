@@ -6,26 +6,26 @@
         <item
             android:id="@+id/nav_findtasks"
             android:icon="@drawable/ic_magnifying_glass"
-            android:title="Find Tasks" />
+            android:title="Find Opgaver" />
 
         <item
             android:id="@+id/nav_myprofile"
             android:icon="@drawable/ic_person_black_24dp"
-            android:title="My Profile" />
+            android:title="Min Profil" />
         <item
             android:id="@+id/nav_mytasks"
             android:icon="@drawable/ic_format_list_bulleted_black_24dp"
-            android:title="My Tasks" />
+            android:title="Mine Opgaver" />
 
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_info_black_24dp"
-            android:title="About" />
+            android:title="Om Os" />
 
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logout"
-            android:title="Logout" />
+            android:title="Log Ud" />
     </group>
 
 </menu>

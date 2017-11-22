@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:text="Create Task"
+            android:text="Rediger Opgave"
             android:textSize="30sp" />
 
         <LinearLayout
@@ -42,7 +42,7 @@
                     android:id="@+id/edit_task1_tbox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Title"
+                    android:hint="Titel"
                     android:inputType="text" />
             </android.support.design.widget.TextInputLayout>
 
@@ -58,7 +58,7 @@
                     android:id="@+id/edit_task2_tbox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Description"
+                    android:hint="Beskrivelse"
                     android:lines="5"
                     android:gravity="top|left"
                     android:inputType="textMultiLine" />
@@ -74,7 +74,7 @@
                     android:id="@+id/edit_task3_tbox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Payment"
+                    android:hint="Betaling"
                     android:inputType="text|number" />
             </android.support.design.widget.TextInputLayout>
 
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:background="@color/blåFarve3"
-                android:text="Create Task" />
+                android:text="Opret Opgave" />
 
 
         </LinearLayout>
@@ -95,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Return to Main screen" />
+            android:text="Tilbage til startsiden" />
 
 
     </LinearLayout>
