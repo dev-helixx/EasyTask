@@ -129,6 +129,8 @@ public class EditTaskFragment extends Fragment implements View.OnClickListener {
                 userId = firebaseAuth.getCurrentUser().getUid();
             }
 
+            if (title != "" && description != "" && payment != "") {
+
             database.addListenerForSingleValueEvent(new ValueEventListener() {
 
 
@@ -144,6 +146,9 @@ public class EditTaskFragment extends Fragment implements View.OnClickListener {
 
                 }
             });
+        } else {
+            Toast.makeText(getContext(), "Ups Husk at udfyld alle felter", Toast.LENGTH_LONG).show();
+        }
 
         }
     }
