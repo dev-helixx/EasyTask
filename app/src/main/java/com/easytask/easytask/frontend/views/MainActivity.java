@@ -214,10 +214,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     isTaskCreator = (boolean)snap.getValue();
 
-                    // Calls oncreateOptionsmenu and hides create button if user is not creator
+                    // Calls onCreateOptionsMenu and hides create button if user is not creator
                     invalidateOptionsMenu();
 
-                    // Hides "My Tasks" if user is not creator
+                    // Hides "My Tasks" in navigation drawer if user is not creator
                     if(!isTaskCreator) {
                         navigationView = (NavigationView) findViewById(R.id.nav_view);
                         Menu nav_Menu = navigationView.getMenu();
