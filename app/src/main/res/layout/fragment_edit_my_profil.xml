@@ -1,0 +1,69 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.easytask.easytask.frontend.views.EditMyProfilFragment">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/Navn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="30dp"
+                android:text="Ramyar Hassani" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="106dp"
+                android:layout_height="123dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_person_black_24dp" />
+
+            <Button
+                android:id="@+id/skiftProfilBillede"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Skift Profil Billede" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:accessibilityLiveRegion="none"
+                android:allowUndo="false"
+                android:autoText="false"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:paddingTop="30dp"
+                android:text="karlemosevej 35 2th" />
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="4600" />
+
+            <EditText
+                android:id="@+id/editText4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Køge" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
