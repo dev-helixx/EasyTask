@@ -9,7 +9,8 @@
     android:clickable="true"
     android:orientation="vertical"
     android:layout_marginTop="15dp"
-    android:layout_marginBottom="15dp">
+    android:layout_marginBottom="15dp"
+    android:weightSum="1">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -23,100 +24,149 @@
         android:layout_gravity="center"
         android:textSize="30sp" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="3"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        >
+        android:layout_height="424dp">
 
-        <!-- Email Label -->
-        <android.support.design.widget.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp">
+            android:layout_weight="3"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
-            <EditText
-                android:id="@+id/create_email_tbox"
+            <!-- Email Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/create_email_tbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Pwd Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/create_pwd1_tbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    android:inputType="textPassword" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Pwd Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/create_pwd2_tbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/create_user_2nd_pass"
+                    android:inputType="textPassword" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Name Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/create_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Navn"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Address Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/create_addresse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Addresse"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- zipCode Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/create_zipcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Post nr."
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- City Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/create_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="By"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
-                android:inputType="textEmailAddress" />
-        </android.support.design.widget.TextInputLayout>
+                android:paddingLeft="5dp"
+                android:text="@string/create_user_type_title"
+                android:textSize="18sp" />
 
-        <!-- Pwd Label -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp">
-
-            <EditText
-                android:id="@+id/create_pwd1_tbox"
+            <CheckBox
+                android:id="@+id/task_doer_checkbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
-                android:inputType="textPassword" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginTop="5dp"
+                android:text="@string/create_user_type_1" />
 
-        <!-- Pwd Label -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp">
-
-            <EditText
-                android:id="@+id/create_pwd2_tbox"
+            <CheckBox
+                android:id="@+id/task_creator_checkbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/create_user_2nd_pass"
-                android:inputType="textPassword" />
-        </android.support.design.widget.TextInputLayout>
+                android:text="@string/create_user_type_2" />
 
-        <TextView
-            android:paddingLeft="5dp"
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/create_user_type_title"
-            android:textSize="18sp" />
-
-        <CheckBox
-            android:layout_marginTop="5dp"
-            android:id="@+id/task_doer_checkbox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/create_user_type_1" />
-
-        <CheckBox
-            android:id="@+id/task_creator_checkbox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/create_user_type_2" />
-
-        <Button
-            android:layout_marginTop="15dp"
-            android:id="@+id/create_user_btn"
-            android:background="@color/blåFarve3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login_create_user_btn" />
+            <Button
+                android:id="@+id/create_user_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@color/blåFarve3"
+                android:text="@string/login_create_user_btn" />
 
 
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/create_return_btn"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="@string/create_user_return_btn" />
-
 
 
 </LinearLayout>

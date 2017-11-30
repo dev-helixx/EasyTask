@@ -12,46 +12,54 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/Navn"
+            android:id="@+id/my_profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingTop="30dp"
-            android:text="Ramyar Hassani" />
+            android:text="Name"
+            android:textSize="30sp" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/my_profile_Picture"
             android:layout_width="106dp"
             android:layout_height="123dp"
             android:layout_gravity="center"
             app:srcCompat="@drawable/ic_person_black_24dp" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/my_profile_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingTop="20dp"
-            android:text="Karlemosevej 35 2th"
+            android:text="Address"
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/my_profile_zipcode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingTop="5dp"
-            android:text="4600"
+            android:text="ZipCode"
             android:textSize="24dp" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/my_profile_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingTop="5dp"
-            android:text="Køge"
+            android:text="City"
             android:textSize="24dp" />
+
+        <Button
+            android:id="@+id/my_profile_changeProfileBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Rediger Profil" />
 
     </LinearLayout>
 

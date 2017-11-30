@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
 
             Fragment ctf = getSupportFragmentManager().findFragmentByTag("createtaskfragment");
+            Fragment mpf = getSupportFragmentManager().findFragmentByTag("myprofilfragment");
             Fragment ftf = getSupportFragmentManager().findFragmentByTag("findtasksfragment");
             Fragment af = getSupportFragmentManager().findFragmentByTag("aboutfragment");
 
@@ -97,6 +98,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .beginTransaction()
                         .setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out)
                         .remove(ctf)
+                        .commit();
+            }
+            else if( mpf != null) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out)
+                        .remove(ftf)
                         .commit();
             }
             else if( ftf != null) {
@@ -173,6 +181,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft.commit();
 
         } else if (id == R.id.nav_myprofile) {
+
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
+            ft.replace(R.id.fragment_container_main, new MyProfilFragment(), "myprofilfragment");
+            ft.addToBackStack(null);
+            ft.commit();
 
         } else if (id == R.id.nav_mytasks) {
 

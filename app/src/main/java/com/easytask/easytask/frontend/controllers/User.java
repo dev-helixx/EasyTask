@@ -11,12 +11,21 @@ public class  User {
 
     private String email;
     private boolean taskCreator;
+    private String name;
+    private String address;
+    private String zipCode;
+    private String city;
+
 //    private String date;
 //    private int avatar;
 
-    public User(String email, boolean taskCreator){
+    public User(String email, boolean taskCreator, String name, String address, String zipCode, String city){
         this.email = email;
         this.taskCreator = taskCreator;
+        this.name = name;
+        this.address = address;
+        this.zipCode = zipCode;
+        this.city = city;
 //        this.date = date;
 //        this.avatar = avatar;
     }
@@ -28,6 +37,29 @@ public class  User {
 
     public boolean getIsTaskCreator() {return taskCreator;}
     public void setIsTaskCreator(boolean taskCreator) {this.taskCreator = taskCreator;}
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {this.name = name;}
+
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {this.address = address;}
+
+    public String getZipCode() {
+        return zipCode;
+    }
+    public void setZipCode(String zipCode) {this.zipCode = zipCode;}
+
+    public String getCity() {
+        return city;
+    }
+    public void setCity(String city) {this.city = city;}
+
+
+
 
 //    public String getDate() {
 //        return date;
