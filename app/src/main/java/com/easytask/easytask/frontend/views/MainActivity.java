@@ -30,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
-    private TextView current_user;
+    private TextView user_name, user_email;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference database;
     private boolean isTaskCreator;
@@ -68,12 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        View headerView = navigationView.getHeaderView(0);
-        current_user = (TextView) headerView.findViewById(R.id.current_user_email_lbl);
-        current_user.setText(firebaseAuth.getCurrentUser().getEmail());
-        navigationView.setNavigationItemSelectedListener(this);
-
+       addUserInfoToNavHeader();
 
 
 
@@ -246,6 +241,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
         }
+    }
+
+    private void addUserInfoToNavHeader() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        user_name = (TextView) headerView.findViewById(R.id.nav_header_name_label);
+        user_email = (TextView) headerView.findViewById(R.id.nav_header_email_label);
+        user_email.setText(firebaseAuth.getCurrentUser().getEmail());
+
+        database.child("users").child(firebaseAuth.getCurrentUser().getUid()).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+            @Override
+            public void onDataChange(DataSnapshot snap) {
+                   user_name.setText(snap.getValue().toString());
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        navigationView.setNavigationItemSelectedListener(this);
+
     }
 
 
