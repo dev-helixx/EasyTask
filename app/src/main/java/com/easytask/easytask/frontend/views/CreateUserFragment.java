@@ -36,7 +36,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class CreateUserFragment extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private Button return_btn, create_user_btn;
-    private EditText usernameET, passwordET, confirmPassET, nameET, addressET, zipCodeET, cityET;
+    private EditText usernameET, passwordET, confirmPassET, nameET, addressET, zipCodeET, cityET, phoneET;
     private String username, password;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference database;
@@ -59,10 +59,11 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
         /* Makes sure that the fragment isn't pushed up by the screen keyboard*/
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
+        /* Get database and firebase references */
         firebaseAuth = FirebaseAuth.getInstance();
-
         database = FirebaseDatabase.getInstance().getReference();
 
+        /* Instantiate views */
         usernameET = (EditText) view.findViewById(R.id.create_email_tbox);
         passwordET = (EditText) view.findViewById(R.id.create_pwd1_tbox);
         confirmPassET = (EditText) view.findViewById(R.id.create_pwd2_tbox);
@@ -70,9 +71,9 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
         addressET = (EditText) view.findViewById(R.id.create_addresse);
         zipCodeET = (EditText) view.findViewById(R.id.create_zipcode);
         cityET = (EditText) view.findViewById(R.id.create_city);
+        phoneET = (EditText) view.findViewById(R.id.create_phonenumber);
         task_creator = (CheckBox) view.findViewById(R.id.task_creator_checkbox);
         task_doer = (CheckBox) view.findViewById(R.id.task_doer_checkbox);
-
         return_btn = (Button) view.findViewById(R.id.create_return_btn);
         create_user_btn = (Button) view.findViewById(R.id.create_user_btn);
 
@@ -153,9 +154,9 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
 //            editor.putString("password", passwordET.getText().toString()).commit();
 //            editor.commit();
             if(task_creator.isChecked()) {
-                createNewUserInDatabase(usernameET.getText().toString(), true, nameET.getText().toString(), addressET.getText().toString(), zipCodeET.getText().toString(), cityET.getText().toString());
+                createNewUserInDatabase(usernameET.getText().toString(), true, nameET.getText().toString(), addressET.getText().toString(), zipCodeET.getText().toString(), cityET.getText().toString(), phoneET.getText().toString());
             }else {
-                createNewUserInDatabase(usernameET.getText().toString(), false, nameET.getText().toString(), addressET.getText().toString(), zipCodeET.getText().toString(), cityET.getText().toString());
+                createNewUserInDatabase(usernameET.getText().toString(), false, nameET.getText().toString(), addressET.getText().toString(), zipCodeET.getText().toString(), cityET.getText().toString(), phoneET.getText().toString());
             }
             removeFragment();
             startActivity(new Intent(getContext(), MainActivity.class));
@@ -163,8 +164,8 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
     }
 
 
-    private void createNewUserInDatabase(String email, boolean taskCreator, String name, String address, String zipCode, String city) {
-        User user = new User(email, taskCreator, name, address, zipCode, city);
+    private void createNewUserInDatabase(String email, boolean taskCreator, String name, String address, String zipCode, String city, String phonenumber) {
+        User user = new User(email, taskCreator, name, address, zipCode, city, phonenumber);
         if(firebaseAuth.getCurrentUser()!= null) {
             database.child("users").child(firebaseAuth.getCurrentUser().getUid()).setValue(user);
            // database.child("users").child(firebaseAuth.getCurrentUser().getUid()).child("name").setValue(nameET.getText());

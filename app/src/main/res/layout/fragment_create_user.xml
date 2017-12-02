@@ -127,11 +127,25 @@
                     android:inputType="text" />
             </android.support.design.widget.TextInputLayout>
 
+            <!-- Phone number Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/create_phonenumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Mobil nummer"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
+
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
+                android:layout_marginTop="5dp"
                 android:text="@string/create_user_type_title"
                 android:textSize="18sp" />
 

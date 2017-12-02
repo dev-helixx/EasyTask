@@ -15,17 +15,19 @@ public class  User {
     private String address;
     private String zipCode;
     private String city;
+    private String phonenumber;
 
 //    private String date;
 //    private int avatar;
 
-    public User(String email, boolean taskCreator, String name, String address, String zipCode, String city){
+    public User(String email, boolean taskCreator, String name, String address, String zipCode, String city, String phonenumber){
         this.email = email;
         this.taskCreator = taskCreator;
         this.name = name;
         this.address = address;
         this.zipCode = zipCode;
         this.city = city;
+        this.phonenumber = phonenumber;
 //        this.date = date;
 //        this.avatar = avatar;
     }
@@ -57,6 +59,11 @@ public class  User {
         return city;
     }
     public void setCity(String city) {this.city = city;}
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+    public void setPhonenumber(String phonenumber) {this.phonenumber = phonenumber;}
 
 
 
