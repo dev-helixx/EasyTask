@@ -90,7 +90,8 @@ public class FindTasksFragment extends Fragment {
                 // tasks indeholder alle tasks IDs
                 for (DataSnapshot tasks : snap1.getChildren()) {
 
-                    task_list.add(new Task(tasks.child("title").getValue().toString(), tasks.child("description").getValue().toString()));
+//                    task_list.add(new Task(tasks.child("title").getValue().toString(), tasks.child("description").getValue().toString()));
+                    task_list.add(new Task(tasks.child("title").getValue().toString(), tasks.child("description").getValue().toString(), tasks.getKey(), Integer.parseInt(tasks.child("payment").getValue().toString())));
 
                 }
 

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.easytask.easytask.R;
 import com.easytask.easytask.frontend.controllers.LVAdapter;
+import com.easytask.easytask.frontend.controllers.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,7 +33,7 @@ public class MyTasksFragment extends Fragment {
     private DatabaseReference userRef, taskRef, test;
     private FirebaseAuth firebaseAuth;
     private String userId;
-    private List<String> subjectArray, descriptionArray;
+    private List<Task> taskList, descriptionArray;
     private ProgressDialog progressDialog;
 
 
@@ -49,10 +50,11 @@ public class MyTasksFragment extends Fragment {
 
         getActivity().setTitle("Mine Opgaver");
 
-        progressDialog = ProgressDialog.show(getContext(), "Fetching all of your tasks", "Please wait", false, false);
+        progressDialog = ProgressDialog.show(getContext(), "Henter alle dine opgaver", "Vent venligst", false, false);
 
-        subjectArray = new ArrayList<>();
-        descriptionArray = new ArrayList<>();
+        taskList = new ArrayList<>();
+//        subjectArray = new ArrayList<>();
+//        descriptionArray = new ArrayList<>();
 
         firebaseAuth = FirebaseAuth.getInstance();
         userRef = FirebaseDatabase.getInstance().getReference();
@@ -64,7 +66,6 @@ public class MyTasksFragment extends Fragment {
         }
         else {
             userId = firebaseAuth.getCurrentUser().getUid();
-//            Toast.makeText(getActivity(), userId, Toast.LENGTH_SHORT).show();
         }
 
         taskRef.child("tasks").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -86,14 +87,15 @@ public class MyTasksFragment extends Fragment {
 
                                 if(userTasks.getKey().equals(tasks.getKey())) {
 
-                                    subjectArray.add(tasks.child("title").getValue().toString());
-                                    descriptionArray.add(tasks.child("description").getValue().toString());
+                                    taskList.add(new Task(tasks.child("title").getValue().toString(), tasks.child("description").getValue().toString(), tasks.getKey(), Integer.parseInt(tasks.child("payment").getValue().toString())));
+//                                    subjectArray.add(tasks.child("title").getValue().toString());
+//                                    descriptionArray.add(tasks.child("description").getValue().toString());
 
                                 }
                             }
                         }
 
-                        LVAdapter myTasksAdapter = new LVAdapter(getActivity(), subjectArray, descriptionArray);
+                        LVAdapter myTasksAdapter = new LVAdapter(getActivity(), taskList);
                         my_tasks_listview = (ListView) view.findViewById(R.id.my_tasks_listview);
                         my_tasks_listview.setAdapter(myTasksAdapter);
 
