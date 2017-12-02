@@ -83,7 +83,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:background="@color/blåFarve3"
+                android:textColor="#FFFFFF"
+                android:background="@color/blåFarve5"
                 android:text="@string/create_task_createbtn" />
 
 
