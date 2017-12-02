@@ -7,19 +7,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.easytask.easytask.R;
-import com.easytask.easytask.frontend.controllers.LVAdapter;
 import com.easytask.easytask.frontend.controllers.RVAdapter;
 import com.easytask.easytask.frontend.controllers.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,10 +32,11 @@ import java.util.List;
 public class FindTasksFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private List<Task> task_list;
+    private List<Task> taskList;
     private ProgressDialog progressDialog;
-    private DatabaseReference taskRef;
+    private DatabaseReference database;
     private FirebaseAuth firebaseAuth;
+    private RVAdapter adapter;
     private String userId;
 
 
@@ -56,50 +53,78 @@ public class FindTasksFragment extends Fragment {
 
         getActivity().setTitle("Alle Opgaver");
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance().getReference();
+
         progressDialog = ProgressDialog.show(getContext(), "Henter alle tilgængelige opgaver", "Vent venligst", false, false);
 
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview);
+
+
+        taskList = new ArrayList<>();
+        adapter = new RVAdapter(taskList);
+
+        LinearLayoutManager llm = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(llm);
         recyclerView.setHasFixedSize(true);
 
-        initializeAvailableTasks();
-
-
-    }
-
-    private void initializeAvailableTasks(){
-
-        task_list = new ArrayList<>();
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        taskRef = FirebaseDatabase.getInstance().getReference();
 
         if(firebaseAuth.getCurrentUser() == null){
             getActivity().finish();
             startActivity(new Intent(getActivity(), LoginActivity.class));
         }else {
             userId = firebaseAuth.getCurrentUser().getUid();
-//            Toast.makeText(getActivity(), userId, Toast.LENGTH_SHORT).show();
         }
 
-        taskRef.child("tasks").addListenerForSingleValueEvent(new ValueEventListener() {
 
+        addDataToRecyclerView();
+
+
+        database.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                addDataToRecyclerView();
+            }
 
             @Override
-            public void onDataChange(DataSnapshot snap1) {
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                addDataToRecyclerView();
+            }
 
-                // tasks indeholder alle tasks IDs
-                for (DataSnapshot tasks : snap1.getChildren()) {
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                addDataToRecyclerView();
+            }
 
-//                    task_list.add(new Task(tasks.child("title").getValue().toString(), tasks.child("description").getValue().toString()));
-                    task_list.add(new Task(tasks.child("title").getValue().toString(), tasks.child("description").getValue().toString(), tasks.getKey(), Integer.parseInt(tasks.child("payment").getValue().toString())));
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                addDataToRecyclerView();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+
+    private void addDataToRecyclerView() {
+
+        database.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot taskData) {
+
+                taskList.clear();
+
+                for (DataSnapshot globalTasks : taskData.child("tasks").getChildren()) {
+
+                    taskList.add(new Task(globalTasks.child("title").getValue().toString(), globalTasks.child("description").getValue().toString(), globalTasks.getKey(), Integer.parseInt(globalTasks.child("payment").getValue().toString())));
 
                 }
 
-                LinearLayoutManager llm = new LinearLayoutManager(getContext());
-                recyclerView.setLayoutManager(llm);
-                RVAdapter adapter = new RVAdapter(task_list);
                 recyclerView.setAdapter(adapter);
-
                 progressDialog.dismiss();
 
             }
@@ -108,7 +133,6 @@ public class FindTasksFragment extends Fragment {
 
             }
         });
-
     }
 
 }

@@ -28,6 +28,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * Created by Burim on 02-11-2017.
  */
@@ -87,9 +89,9 @@ public class CreateTaskFragment extends Fragment implements View.OnClickListener
                 @Override
                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                     if (databaseError != null) {
-                        Toast.makeText(getContext(), "Failed to create task", Toast.LENGTH_SHORT).show();
+                        Toasty.error(getContext(), "Opgaven blev ikke oprettet! ", Toast.LENGTH_SHORT, true).show();
                     } else {
-                        Toast.makeText(getContext(), "Success!", Toast.LENGTH_SHORT).show();
+                        Toasty.success(getContext(), "Opgave oprettet! ", Toast.LENGTH_SHORT, true).show();
                         hideFragment();
 
                     }
@@ -140,7 +142,7 @@ public class CreateTaskFragment extends Fragment implements View.OnClickListener
                 }
             });
             } else {
-                Toast.makeText(getContext(), "Ups Husk at udfyld alle felter", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Ups! Husk at udfyld alle felter", Toast.LENGTH_LONG).show();
             }
         }
     }

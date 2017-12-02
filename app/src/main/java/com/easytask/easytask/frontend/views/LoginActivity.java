@@ -24,6 +24,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import es.dmoral.toasty.Toasty;
+
 
 /**
  * Created by Silas on 27-09-2017.
@@ -133,14 +135,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         if (loginResult.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(LoginActivity.this, "LOGIN SUCCESS", Toast.LENGTH_SHORT).show();
+                            Toasty.success(LoginActivity.this, "Success! ", Toast.LENGTH_SHORT, true).show();
                             progressDialog.dismiss();
 
                             Intent mainscreen = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(mainscreen);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Toasty.error(LoginActivity.this, "Kunne ikke logge ind! ", Toast.LENGTH_SHORT, true).show();
                             progressDialog.dismiss();
                         }
                     }

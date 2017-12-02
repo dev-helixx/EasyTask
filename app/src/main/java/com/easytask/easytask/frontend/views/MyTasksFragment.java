@@ -25,13 +25,15 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * Created by Silas on 15-11-2017.
  */
 public class MyTasksFragment extends Fragment {
 
     private ListView my_tasks_listview;
-    private DatabaseReference userRef, taskRef, test;
+    private DatabaseReference userRef, taskRef, test, database;
     private FirebaseAuth firebaseAuth;
     private String userId;
     private List<Task> taskList, descriptionArray;
@@ -57,14 +59,14 @@ public class MyTasksFragment extends Fragment {
         taskList = new ArrayList<>();
         myTasksAdapter = new LVAdapter(getActivity(), taskList);
 
+
         my_tasks_listview = (ListView) view.findViewById(R.id.my_tasks_listview);
-//        subjectArray = new ArrayList<>();
-//        descriptionArray = new ArrayList<>();
 
         firebaseAuth = FirebaseAuth.getInstance();
         test = FirebaseDatabase.getInstance().getReference();
         userRef = FirebaseDatabase.getInstance().getReference();
         taskRef = FirebaseDatabase.getInstance().getReference();
+        database = FirebaseDatabase.getInstance().getReference();
 
         if(firebaseAuth.getCurrentUser() == null){
             getActivity().finish();
@@ -74,47 +76,32 @@ public class MyTasksFragment extends Fragment {
             userId = firebaseAuth.getCurrentUser().getUid();
         }
 
-        taskRef.child("tasks").addListenerForSingleValueEvent(new ValueEventListener() {
 
+        addDataToListView();
+
+
+
+        database.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot taskData, String s) {
+                addDataToListView();
+            }
 
             @Override
-            public void onDataChange(final DataSnapshot snap1) {
-
-
-                userRef.child("users").child(userId).child("tasks").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot snap2) {
-
-                        // tasks indeholder alle tasks IDs
-                        for (DataSnapshot tasks : snap1.getChildren()) {
-
-                            // userTasks indeholder alle brugerens taskIDs
-                            for (DataSnapshot userTasks : snap2.getChildren()) {
-
-                                if(userTasks.getKey().equals(tasks.getKey())) {
-
-                                    taskList.add(new Task(tasks.child("title").getValue().toString(), tasks.child("description").getValue().toString(), tasks.getKey(), Integer.parseInt(tasks.child("payment").getValue().toString())));
-
-                                }
-                            }
-                        }
-
-
-
-                        my_tasks_listview.setAdapter(myTasksAdapter);
-                        progressDialog.dismiss();
-
-
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-
-
-                });
-
+            public void onChildChanged(DataSnapshot taskData, String s) {
+                addDataToListView();
             }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                addDataToListView();
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                addDataToListView();
+            }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -124,4 +111,38 @@ public class MyTasksFragment extends Fragment {
 
     }
 
+    private void addDataToListView() {
+
+
+        database.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot taskData) {
+
+                myTasksAdapter.clear();
+
+                for(DataSnapshot globalTasks : taskData.child("tasks").getChildren()) {
+
+                    for(DataSnapshot userTasks : taskData.child("users").child(userId).child("tasks").getChildren())
+
+                        if (globalTasks.getKey().equals(userTasks.getKey())) {
+
+                            taskList.add(new Task(globalTasks.child("title").getValue().toString(), globalTasks.child("description").getValue().toString(), globalTasks.getKey(), Integer.parseInt(globalTasks.child("payment").getValue().toString())));
+
+                        }
+                }
+
+
+
+                my_tasks_listview.setAdapter(myTasksAdapter);
+                progressDialog.dismiss();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 }
