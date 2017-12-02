@@ -7,10 +7,10 @@ package com.easytask.easytask.frontend.controllers;
 
 public class Task {
 
-    protected String card_subject;
-    protected String card_description;
-    protected String taskID;
-    protected int taskReward;
+    private String card_subject;
+    private String card_description;
+    private String taskID;
+    private int taskReward;
 
 
     public Task(String card_subject, String card_description, String taskID, int taskReward) {

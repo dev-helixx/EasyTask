@@ -15,6 +15,7 @@ import com.easytask.easytask.R;
 import com.easytask.easytask.frontend.controllers.LVAdapter;
 import com.easytask.easytask.frontend.controllers.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +36,7 @@ public class MyTasksFragment extends Fragment {
     private String userId;
     private List<Task> taskList, descriptionArray;
     private ProgressDialog progressDialog;
+    private LVAdapter myTasksAdapter;
 
 
     @Override
@@ -53,10 +55,14 @@ public class MyTasksFragment extends Fragment {
         progressDialog = ProgressDialog.show(getContext(), "Henter alle dine opgaver", "Vent venligst", false, false);
 
         taskList = new ArrayList<>();
+        myTasksAdapter = new LVAdapter(getActivity(), taskList);
+
+        my_tasks_listview = (ListView) view.findViewById(R.id.my_tasks_listview);
 //        subjectArray = new ArrayList<>();
 //        descriptionArray = new ArrayList<>();
 
         firebaseAuth = FirebaseAuth.getInstance();
+        test = FirebaseDatabase.getInstance().getReference();
         userRef = FirebaseDatabase.getInstance().getReference();
         taskRef = FirebaseDatabase.getInstance().getReference();
 
@@ -88,17 +94,14 @@ public class MyTasksFragment extends Fragment {
                                 if(userTasks.getKey().equals(tasks.getKey())) {
 
                                     taskList.add(new Task(tasks.child("title").getValue().toString(), tasks.child("description").getValue().toString(), tasks.getKey(), Integer.parseInt(tasks.child("payment").getValue().toString())));
-//                                    subjectArray.add(tasks.child("title").getValue().toString());
-//                                    descriptionArray.add(tasks.child("description").getValue().toString());
 
                                 }
                             }
                         }
 
-                        LVAdapter myTasksAdapter = new LVAdapter(getActivity(), taskList);
-                        my_tasks_listview = (ListView) view.findViewById(R.id.my_tasks_listview);
-                        my_tasks_listview.setAdapter(myTasksAdapter);
 
+
+                        my_tasks_listview.setAdapter(myTasksAdapter);
                         progressDialog.dismiss();
 
 
@@ -108,6 +111,7 @@ public class MyTasksFragment extends Fragment {
 
                     }
 
+
                 });
 
             }
@@ -116,6 +120,7 @@ public class MyTasksFragment extends Fragment {
 
             }
         });
+
 
     }
 

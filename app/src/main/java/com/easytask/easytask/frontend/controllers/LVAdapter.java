@@ -1,27 +1,28 @@
 package com.easytask.easytask.frontend.controllers;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
-import android.renderscript.ScriptGroup;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeInfoDialog;
-import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeWarningDialog;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure;
 import com.easytask.easytask.R;
 import com.easytask.easytask.frontend.views.LoginActivity;
+import com.easytask.easytask.frontend.views.MyTasksFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
@@ -36,20 +37,18 @@ public class LVAdapter extends ArrayAdapter {
 
     //to reference the Activity
     private Activity context;
-    //    private Integer[] imageIDarray;
     private List<Task> taskList;
-    private List<Task> descriptionArray;
     private DatabaseReference database;
     private FirebaseAuth firebaseAuth;
     private String userID;
+//    private Integer[] imageIDarray;
 
     public LVAdapter(Activity context, List<Task> taskList/*, List<Task> descriptionArrayParam, Integer[] imageIDArrayParam*/){
         super(context, R.layout.listview_row_layout , taskList);
 
         this.context = context;
-//        this.imageIDarray = imageIDArrayParam;
         this.taskList = taskList;
-//        this.descriptionArray = descriptionArrayParam;
+//        this.imageIDarray = imageIDArrayParam;
 
 
         /* Get database references */
@@ -75,12 +74,13 @@ public class LVAdapter extends ArrayAdapter {
         TextView descriptionField = (TextView) rowView.findViewById(R.id.my_tasks_description);
         ImageButton delete_my_task = (ImageButton) rowView.findViewById(R.id.my_tasks_delete_button);
         ImageButton edit_my_task = (ImageButton) rowView.findViewById(R.id.my_tasks_edit_button);
+
 //        ImageView imageView = (ImageView) rowView.findViewById(R.id.my_tasks_imageview);
 
 
         //this code sets the values of the objects to values from the arrays
-        subjectField.setText(taskList.get(position).card_subject);
-        descriptionField.setText(taskList.get(position).card_description);
+        subjectField.setText(taskList.get(position).getCard_subject());
+        descriptionField.setText(taskList.get(position).getCard_description());
 //        imageView.setImageResource(imageIDarray[position]);
 
 
@@ -106,6 +106,8 @@ public class LVAdapter extends ArrayAdapter {
                             @Override
                             public void exec() {
 
+                                final Query taskQuery = database.child("users").child(userID).child("tasks").child(taskList.get(position).getTaskID());
+
                                 database.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot taskData) {
@@ -113,13 +115,19 @@ public class LVAdapter extends ArrayAdapter {
 
                                         for(DataSnapshot globalTasks : taskData.child("tasks").getChildren()) {
 
-                                            if (globalTasks.getKey().equals(taskList.get(position).taskID)) {
+                                            if (globalTasks.getKey().equals(taskList.get(position).getTaskID())) {
 
-                                                
-
-                                                Toasty.success(context, "Opgave slettet!", Toast.LENGTH_SHORT, true).show();
+                                                /* Removes clicked task from global tasks */
+                                                globalTasks.getRef().removeValue();
+                                                /* Removes clicked tasks from users own tasks */
+                                                taskQuery.getRef().removeValue();
                                             }
                                         }
+
+
+
+                                        Toasty.success(context, "Opgave slettet! ", Toast.LENGTH_SHORT, true).show();
+
 
                                     }
 
@@ -129,12 +137,15 @@ public class LVAdapter extends ArrayAdapter {
                                     }
                                 });
 
+
+
+
                             }
                         })
                         .setNegativeButtonClick(new Closure() {
                             @Override
                             public void exec() {
-                                //click
+                                /* Dismisses dialog box */
                             }
                         })
                         .show();
@@ -146,6 +157,7 @@ public class LVAdapter extends ArrayAdapter {
             @Override
             public void onClick(View v) {
 
+                // Open edit task fragment
             }
         });
 
@@ -153,5 +165,14 @@ public class LVAdapter extends ArrayAdapter {
         return rowView;
 
     }
+
+//    private void reloadFragment() {
+//        FragmentManager fragmentManager = context..getFragmentManager();
+//        android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        Fragment myTasksFragment = new MyTasksFragment();
+//        fragmentTransaction.replace(R.id.fragment_container_main, myTasksFragment);
+//        fragmentTransaction.commit();
+//    }
+
 
 }

@@ -38,8 +38,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TaskViewHolder>{
     @Override
     public void onBindViewHolder(TaskViewHolder holder, int i) {
 
-        description = tasks.get(i).card_description;
-        subject = tasks.get(i).card_subject;
+        description = tasks.get(i).getCard_description();
+        subject = tasks.get(i).getCard_subject();
 
         holder.card_subject.setText(subject);
         holder.card_description.setText(description);
