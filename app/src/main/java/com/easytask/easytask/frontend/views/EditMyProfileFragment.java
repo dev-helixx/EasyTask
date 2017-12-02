@@ -19,6 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import es.dmoral.toasty.Toasty;
+
 
 public class EditMyProfileFragment extends Fragment implements View.OnClickListener {
 
@@ -128,9 +130,9 @@ public class EditMyProfileFragment extends Fragment implements View.OnClickListe
                 @Override
                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                     if (databaseError != null) {
-                        Toast.makeText(getContext(), "Failed to save", Toast.LENGTH_SHORT).show();
+                        Toasty.error(getContext(), "Kunne ikke gemme data! ", Toast.LENGTH_SHORT, true).show();
                     } else {
-                        Toast.makeText(getContext(), "Success!", Toast.LENGTH_SHORT).show();
+                        Toasty.success(getContext(), "Oplysninger opdateret! ", Toast.LENGTH_SHORT, true).show();
 
                         FragmentTransaction ft = getFragmentManager().beginTransaction();
                         ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
