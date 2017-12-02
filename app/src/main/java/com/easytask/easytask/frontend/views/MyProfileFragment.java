@@ -1,7 +1,5 @@
 package com.easytask.easytask.frontend.views;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -20,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-public class MyProfilFragment extends Fragment implements View.OnClickListener {
+public class MyProfileFragment extends Fragment implements View.OnClickListener {
 
     private DatabaseReference database;
     private FirebaseAuth firebaseAuth;
@@ -75,7 +73,7 @@ public class MyProfilFragment extends Fragment implements View.OnClickListener {
         if (view == changeProfileButton){
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
-            ft.replace(R.id.fragment_container_main, new EditMyProfilFragment());
+            ft.replace(R.id.fragment_container_main, new EditMyProfileFragment());
             ft.commit();
 
         }

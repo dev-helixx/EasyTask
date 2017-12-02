@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
-            ft.replace(R.id.fragment_container_main, new MyProfilFragment(), "myprofilfragment");
+            ft.replace(R.id.fragment_container_main, new MyProfileFragment(), "myprofilfragment");
             ft.addToBackStack(null);
             ft.commit();
 

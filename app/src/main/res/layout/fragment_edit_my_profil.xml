@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.easytask.easytask.frontend.views.EditMyProfilFragment">
+    android:layout_margin="10dp"
+    tools:context="com.easytask.easytask.frontend.views.EditMyProfileFragment">
 
 
     <LinearLayout
@@ -11,16 +12,24 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edit_profile_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name"
-            android:textSize="30dp" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp">
+            <EditText
+                android:id="@+id/edit_profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:paddingTop="0dp"
+                android:inputType="textPersonName"
+                android:text="Navn"
+                android:hint="Fulde navn"
+                android:textSize="30dp" />
+        </android.support.design.widget.TextInputLayout>
+
+
+
 
         <ImageView
             android:id="@+id/edit_profile_picture"
@@ -31,42 +40,68 @@
 
         <Button
             android:id="@+id/edit_Profile_picture"
+            android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="@color/blåFarve5"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="10dp"
             android:text="Skift Profil Billede" />
 
-        <EditText
-            android:id="@+id/edit_my_profile_address1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <EditText
+                android:paddingTop="0dp"
+                android:id="@+id/edit_my_profile_address1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Adresse"
+                android:hint="Adresse"/>
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/edit_my_profile_zipCode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="zipCode" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <EditText
+                android:paddingTop="0dp"
+                android:id="@+id/edit_my_profile_zipCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Postnummer"
+                android:hint="Postnummer"/>
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/edit_my_profile_city"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="city" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp" >
+            <EditText
+                android:paddingTop="0dp"
+                android:id="@+id/edit_my_profile_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="By"
+                android:hint="By"/>
+        </android.support.design.widget.TextInputLayout>
+
 
         <Button
             android:id="@+id/edit_my_profile_savebutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/blåFarve5"
+            android:textColor="#FFFFFF"
             android:layout_gravity="center"
             android:text="Gem" />
 

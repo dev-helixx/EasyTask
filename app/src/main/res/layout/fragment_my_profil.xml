@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.easytask.easytask.frontend.views.MyProfilFragment">
+    tools:context="com.easytask.easytask.frontend.views.MyProfileFragment">
 
 
     <LinearLayout
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingTop="30dp"
-            android:text="Name"
+            android:text="Fulde navn"
             android:textSize="30sp" />
 
         <ImageView
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingTop="20dp"
-            android:text="Address"
+            android:text="Adresse"
             android:textSize="24sp" />
 
         <TextView
@@ -55,8 +55,11 @@
             android:textSize="24dp" />
 
         <Button
+            android:layout_margin="10dp"
             android:id="@+id/my_profile_changeProfileBtn"
             android:layout_width="wrap_content"
+            android:background="@color/blåFarve5"
+            android:padding="10dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Rediger Profil" />
