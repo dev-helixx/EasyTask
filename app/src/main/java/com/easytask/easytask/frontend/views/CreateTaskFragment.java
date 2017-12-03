@@ -112,9 +112,9 @@ public class CreateTaskFragment extends Fragment implements View.OnClickListener
 
             create_task_btn.setEnabled(false);
 
-            title = titleET.getText().toString();
-            description = descriptionET.getText().toString();
-            payment = paymentET.getText().toString();
+            title = titleET.getText().toString().replaceAll("^\\s+", "").replaceAll("\\s+$", "");
+            description = descriptionET.getText().toString().replaceAll("^\\s+", "").replaceAll("\\s+$", "");
+            payment = paymentET.getText().toString().replaceAll("^\\s+", "").replaceAll("\\s+$", "");
 
 
             String titleReplace = title.replace(" ","");
