@@ -143,9 +143,8 @@ public class EditTaskFragment extends Fragment implements View.OnClickListener {
                 userId = firebaseAuth.getCurrentUser().getUid();
             }
 
-            if (title != "" && description != "" && payment != "") {
+            if (title != "" && description != "" && payment != "" && titleReplace != "" && descriptionReplace != "" && paymentReplace != "") {
 
-                if (titleReplace != "" && descriptionReplace != "" && paymentReplace != "") {
 
             database.addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -162,11 +161,6 @@ public class EditTaskFragment extends Fragment implements View.OnClickListener {
                     edit_task_btn.setEnabled(true);
                 }
             });
-
-                } else {
-                    Toasty.error(getContext(), "Ups! Husk at udfyld alle felter", Toast.LENGTH_LONG).show();
-                    edit_task_btn.setEnabled(true);
-                }
 
         } else {
             Toasty.error(getContext(), "Ups Husk at udfyld alle felter", Toast.LENGTH_LONG).show();

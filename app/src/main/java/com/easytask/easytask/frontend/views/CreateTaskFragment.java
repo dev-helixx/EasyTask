@@ -117,9 +117,9 @@ public class CreateTaskFragment extends Fragment implements View.OnClickListener
             payment = paymentET.getText().toString();
 
 
-            String titleReplace = title.replaceAll("\\s+","");
-            String descriptionReplace = description.replaceAll("\\s+","");
-            String paymentReplace = payment.replaceAll("\\s+","");
+            String titleReplace = title.replace(" ","");
+            String descriptionReplace = description.replace(" ","");
+            String paymentReplace = payment.replace(" ","");
 
             firebaseAuth = FirebaseAuth.getInstance();
 
@@ -132,8 +132,7 @@ public class CreateTaskFragment extends Fragment implements View.OnClickListener
                 userId = firebaseAuth.getCurrentUser().getUid();
             }
 
-            if (title != "" && description != "" && payment != "") {
-                if (titleReplace != "" && descriptionReplace != "" && paymentReplace != "") {
+            if (title != "" && description != "" && payment != "" && titleReplace != "" && descriptionReplace != "" && paymentReplace != "") {
                     database.addListenerForSingleValueEvent(new ValueEventListener() {
 
 
@@ -150,10 +149,6 @@ public class CreateTaskFragment extends Fragment implements View.OnClickListener
 
                         }
                     });
-                } else {
-                    Toasty.error(getContext(), "Ups! Husk at udfyld alle felter", Toast.LENGTH_LONG).show();
-                    create_task_btn.setEnabled(true);
-                }
             } else {
                 Toasty.error(getContext(), "Ups! Husk at udfyld alle felter", Toast.LENGTH_LONG).show();
                 create_task_btn.setEnabled(true);
