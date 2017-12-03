@@ -90,6 +90,7 @@ public class CreateTaskFragment extends Fragment implements View.OnClickListener
                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                     if (databaseError != null) {
                         Toasty.error(getContext(), "Opgaven blev ikke oprettet! ", Toast.LENGTH_SHORT, true).show();
+                        create_task_btn.setEnabled(true);
                     } else {
                         Toasty.success(getContext(), "Opgave oprettet! ", Toast.LENGTH_SHORT, true).show();
                         hideFragment();
@@ -109,9 +110,16 @@ public class CreateTaskFragment extends Fragment implements View.OnClickListener
             hideFragment();
         }else if(view == create_task_btn ) {
 
+            create_task_btn.setEnabled(false);
+
             title = titleET.getText().toString();
             description = descriptionET.getText().toString();
             payment = paymentET.getText().toString();
+
+
+            String titleReplace = title.replaceAll("\\s+","");
+            String descriptionReplace = description.replaceAll("\\s+","");
+            String paymentReplace = payment.replaceAll("\\s+","");
 
             firebaseAuth = FirebaseAuth.getInstance();
 
@@ -125,24 +133,30 @@ public class CreateTaskFragment extends Fragment implements View.OnClickListener
             }
 
             if (title != "" && description != "" && payment != "") {
+                if (titleReplace != "" && descriptionReplace != "" && paymentReplace != "") {
+                    database.addListenerForSingleValueEvent(new ValueEventListener() {
 
-            database.addListenerForSingleValueEvent(new ValueEventListener() {
 
+                        @Override
+                        public void onDataChange(DataSnapshot snap) {
 
+                            writeNewTask(title, description, payment, taskId, userId);
 
-                @Override
-                public void onDataChange(DataSnapshot snap) {
+                        }
 
-                    writeNewTask(title, description, payment, taskId, userId);
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            create_task_btn.setEnabled(true);
 
+                        }
+                    });
+                } else {
+                    Toasty.error(getContext(), "Ups! Husk at udfyld alle felter", Toast.LENGTH_LONG).show();
+                    create_task_btn.setEnabled(true);
                 }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
             } else {
-                Toast.makeText(getContext(), "Ups! Husk at udfyld alle felter", Toast.LENGTH_LONG).show();
+                Toasty.error(getContext(), "Ups! Husk at udfyld alle felter", Toast.LENGTH_LONG).show();
+                create_task_btn.setEnabled(true);
             }
         }
     }

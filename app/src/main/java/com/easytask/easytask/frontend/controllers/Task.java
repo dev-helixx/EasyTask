@@ -22,6 +22,13 @@ public class Task {
 
     }
 
+    public Task() {
+        this.card_subject = card_subject;
+        this.card_description = card_description;
+        this.taskID = taskID;
+        this.taskReward = taskReward;
+    }
+
     public String getCard_subject() {
         return card_subject;
     }

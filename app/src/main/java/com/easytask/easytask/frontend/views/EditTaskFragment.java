@@ -15,12 +15,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.easytask.easytask.R;
+import com.easytask.easytask.frontend.controllers.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import es.dmoral.toasty.Toasty;
 
 /**
  * Created by Burim on 02-11-2017.
@@ -64,6 +67,9 @@ public class EditTaskFragment extends Fragment implements View.OnClickListener {
         return_btn.setOnClickListener(this);
         edit_task_btn.setOnClickListener(this);
 
+        Task task = new Task();
+        taskId = task.getTaskID();
+
         database.addListenerForSingleValueEvent(new ValueEventListener() {
 
 
@@ -94,9 +100,10 @@ public class EditTaskFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                     if (databaseError != null) {
-                        Toast.makeText(getContext(), "Failed to create task", Toast.LENGTH_SHORT).show();
+                        Toasty.error(getContext(), "Failed to create task", Toast.LENGTH_SHORT).show();
+                        edit_task_btn.setEnabled(true);
                     } else {
-                        Toast.makeText(getContext(), "Success!", Toast.LENGTH_SHORT).show();
+                        Toasty.success(getContext(), "Opgave slettet! ", Toast.LENGTH_SHORT, true).show();
                         hideFragment();
 
                     }
@@ -114,9 +121,16 @@ public class EditTaskFragment extends Fragment implements View.OnClickListener {
             hideFragment();
         }else if(view == edit_task_btn) {
 
+            edit_task_btn.setEnabled(false);
+
             title = titleET.getText().toString();
             description = descriptionET.getText().toString();
             payment = paymentET.getText().toString();
+
+            String titleReplace = title.replaceAll("\\s+","");
+            String descriptionReplace = description.replaceAll("\\s+","");
+            String paymentReplace = payment.replaceAll("\\s+","");
+
 
             firebaseAuth = FirebaseAuth.getInstance();
 
@@ -131,6 +145,8 @@ public class EditTaskFragment extends Fragment implements View.OnClickListener {
 
             if (title != "" && description != "" && payment != "") {
 
+                if (titleReplace != "" && descriptionReplace != "" && paymentReplace != "") {
+
             database.addListenerForSingleValueEvent(new ValueEventListener() {
 
 
@@ -143,18 +159,22 @@ public class EditTaskFragment extends Fragment implements View.OnClickListener {
                 }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-
+                    edit_task_btn.setEnabled(true);
                 }
             });
+
+                } else {
+                    Toasty.error(getContext(), "Ups! Husk at udfyld alle felter", Toast.LENGTH_LONG).show();
+                    edit_task_btn.setEnabled(true);
+                }
+
         } else {
-            Toast.makeText(getContext(), "Ups Husk at udfyld alle felter", Toast.LENGTH_LONG).show();
+            Toasty.error(getContext(), "Ups Husk at udfyld alle felter", Toast.LENGTH_LONG).show();
+                edit_task_btn.setEnabled(true);
         }
 
         }
     }
-
-
-
 
 
     public void hideFragment() {

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeInfoDialog;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure;
 import com.easytask.easytask.R;
+import com.easytask.easytask.frontend.views.CreateTaskFragment;
+import com.easytask.easytask.frontend.views.EditTaskFragment;
 import com.easytask.easytask.frontend.views.LoginActivity;
 import com.easytask.easytask.frontend.views.MyTasksFragment;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,7 +36,7 @@ import es.dmoral.toasty.Toasty;
  * Created by Silas on 16-11-2017.
  */
 
-public class LVAdapter extends ArrayAdapter {
+public class LVAdapter extends ArrayAdapter{
 
     //to reference the Activity
     private Activity context;
@@ -156,6 +159,30 @@ public class LVAdapter extends ArrayAdapter {
         edit_my_task.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                database.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot taskData) {
+
+
+                        for(DataSnapshot globalTasks : taskData.child("tasks").getChildren()) {
+
+                            if (globalTasks.getKey().equals(taskList.get(position).getTaskID())) {
+
+                                Task task = new Task();
+                                task.setTaskID(taskList.get(position).getTaskID());
+
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
 
                 // Open edit task fragment
             }
