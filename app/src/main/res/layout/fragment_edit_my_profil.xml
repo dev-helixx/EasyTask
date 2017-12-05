@@ -39,7 +39,7 @@
             android:src="@drawable/ic_person_black_24dp" />
 
         <Button
-            android:id="@+id/edit_Profile_picture"
+            android:id="@+id/edit_profilepicture_button"
             android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -92,6 +92,21 @@
                 android:inputType="textPersonName"
                 android:text="By"
                 android:hint="By"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp" >
+            <EditText
+                android:paddingTop="0dp"
+                android:id="@+id/edit_my_profile_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="+45454545"
+                android:hint="Telefonnummer"/>
         </android.support.design.widget.TextInputLayout>
 
 

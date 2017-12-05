@@ -1,10 +1,8 @@
 package com.easytask.easytask.frontend.controllers;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +14,8 @@ import android.widget.Toast;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeInfoDialog;
 import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure;
 import com.easytask.easytask.R;
-import com.easytask.easytask.frontend.views.CreateTaskFragment;
-import com.easytask.easytask.frontend.views.EditTaskFragment;
 import com.easytask.easytask.frontend.views.LoginActivity;
-import com.easytask.easytask.frontend.views.MyTasksFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,16 +34,15 @@ import es.dmoral.toasty.Toasty;
 
 public class LVAdapter extends ArrayAdapter{
 
-    public interface OnChangeFragmentListener { void changeFragment(String taskID);}
+    public interface EditTaskFragmentInterface { void openFragment(String taskID);}
 
 
-    //to reference the Activity
     private Activity context;
     private List<Task> taskList;
     private DatabaseReference database;
     private FirebaseAuth firebaseAuth;
     private String userID;
-    private OnChangeFragmentListener onChangeFragmentListener;
+    private EditTaskFragmentInterface fragmentInterface;
 
 
 
@@ -56,7 +51,7 @@ public class LVAdapter extends ArrayAdapter{
         this.context = context;
         this.taskList = taskList;
 
-        onChangeFragmentListener = (OnChangeFragmentListener) context;
+        fragmentInterface = (EditTaskFragmentInterface) context;
 
         /* Get database references */
         firebaseAuth = FirebaseAuth.getInstance();
@@ -96,7 +91,6 @@ public class LVAdapter extends ArrayAdapter{
             @Override
             public void onClick(View v) {
 
-
                 new AwesomeInfoDialog(context)
                         .setTitle("Advarsel!")
                         .setMessage("Du er ved at slette din opgave. Er du sikker på du vil fortsætte?")
@@ -113,28 +107,23 @@ public class LVAdapter extends ArrayAdapter{
                             @Override
                             public void exec() {
 
-                                final Query taskQuery = database.child("users").child(userID).child("tasks").child(taskList.get(position).getTaskID());
+
+                                final Query globalTaskRef =  database.child("tasks").child(taskList.get(position).getTaskID());
+                                final Query usersTasksRef =  database.child("users").child(userID).child("tasks").child(taskList.get(position).getTaskID());
+
 
                                 database.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot taskData) {
 
 
-                                        for(DataSnapshot globalTasks : taskData.child("tasks").getChildren()) {
-
-                                            if (globalTasks.getKey().equals(taskList.get(position).getTaskID())) {
-
-                                                /* Removes clicked task from global tasks */
-                                                globalTasks.getRef().removeValue();
-                                                /* Removes clicked tasks from users own tasks */
-                                                taskQuery.getRef().removeValue();
+                                        globalTaskRef.getRef().removeValue();
+                                        usersTasksRef.getRef().removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull com.google.android.gms.tasks.Task<Void> task) {
+                                                Toasty.success(context, "Opgave slettet! ", Toast.LENGTH_SHORT, true).show();
                                             }
-                                        }
-
-
-
-                                        Toasty.success(context, "Opgave slettet! ", Toast.LENGTH_SHORT, true).show();
-
+                                        });
 
                                     }
 
@@ -164,33 +153,8 @@ public class LVAdapter extends ArrayAdapter{
             @Override
             public void onClick(View v) {
 
-                onChangeFragmentListener.changeFragment(taskList.get(position).getTaskID());
+                fragmentInterface.openFragment(taskList.get(position).getTaskID());
 
-//                database.addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot taskData) {
-//
-//
-//                        for(DataSnapshot globalTasks : taskData.child("tasks").getChildren()) {
-//
-//                            if (globalTasks.getKey().equals(taskList.get(position).getTaskID())) {
-//
-//                                Task task = new Task();
-//                                task.setTaskID(taskList.get(position).getTaskID());
-//
-//                            }
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//
-//                    }
-//                });
-
-
-                // Open edit task fragment
             }
         });
 
@@ -199,13 +163,6 @@ public class LVAdapter extends ArrayAdapter{
 
     }
 
-//    private void reloadFragment() {
-//        FragmentManager fragmentManager = context..getFragmentManager();
-//        android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        Fragment myTasksFragment = new MyTasksFragment();
-//        fragmentTransaction.replace(R.id.fragment_container_main, myTasksFragment);
-//        fragmentTransaction.commit();
-//    }
 
 
 }

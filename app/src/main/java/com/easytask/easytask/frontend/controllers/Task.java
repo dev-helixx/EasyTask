@@ -10,24 +10,20 @@ public class Task {
     private String card_subject;
     private String card_description;
     private String taskID;
+    private String creatorID;
     private int taskReward;
 
 
-    public Task(String card_subject, String card_description, String taskID, int taskReward) {
+    public Task(String card_subject, String card_description, String taskID, int taskReward, String creatorID) {
         this.card_subject = card_subject;
         this.card_description = card_description;
         this.taskID = taskID;
         this.taskReward = taskReward;
+        this.creatorID = creatorID;
 
 
     }
 
-    public Task() {
-        this.card_subject = card_subject;
-        this.card_description = card_description;
-        this.taskID = taskID;
-        this.taskReward = taskReward;
-    }
 
     public String getCard_subject() {
         return card_subject;
@@ -48,6 +44,11 @@ public class Task {
         return taskReward;
     }
     public void setTaskReward(int taskReward) {this.taskReward = taskReward;}
+
+    public String getCreatorID() {
+        return creatorID;
+    }
+    public void setCreatorID(String creatorID) {this.creatorID = creatorID;}
 
 
 

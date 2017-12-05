@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.easytask.easytask.R;
 import com.easytask.easytask.frontend.controllers.LVAdapter;
@@ -28,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
  * Created by Silas on 27-09-2017.
  */
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, LVAdapter.OnChangeFragmentListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, LVAdapter.EditTaskFragmentInterface {
 
 
     private TextView user_name, user_email;
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-
+            Fragment epf = getSupportFragmentManager().findFragmentByTag("editprofilefragment");
             Fragment ctf = getSupportFragmentManager().findFragmentByTag("createtaskfragment");
             Fragment mpf = getSupportFragmentManager().findFragmentByTag("myprofilfragment");
             Fragment ftf = getSupportFragmentManager().findFragmentByTag("findtasksfragment");
@@ -115,6 +116,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .beginTransaction()
                         .setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out)
                         .remove(af)
+                        .commit();
+            }
+            else if( epf != null) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out)
+                        .replace(R.id.fragment_container_main, new MyProfileFragment())
                         .commit();
             }else {
                 super.onBackPressed();
@@ -180,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
-            ft.replace(R.id.fragment_container_main, new MyProfileFragment(), "myprofilfragment");
+            ft.replace(R.id.fragment_container_main, new MyProfileFragment(), "myprofilefragment");
             ft.addToBackStack(null);
             ft.commit();
 
@@ -188,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
-            ft.replace(R.id.fragment_container_main, new MyTasksFragment(), "findtasksfragment");
+            ft.replace(R.id.fragment_container_main, new MyTasksFragment(), "mytasksfragment");
             ft.addToBackStack(null);
             ft.commit();
 
@@ -269,8 +277,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void changeFragment(String taskID) {
-        /* Interface method for changing fragment inside LVAdapter class */
+    public void openFragment(String taskID) {
+        /* Interface method for changing fragment from inside LVAdapter class */
 
         Bundle bundle = new Bundle();
         bundle.putString("taskid", taskID);

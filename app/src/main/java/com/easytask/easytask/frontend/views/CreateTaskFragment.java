@@ -85,6 +85,7 @@ public class CreateTaskFragment extends Fragment implements View.OnClickListener
             database.child("users").child(userId).child("tasks").child(taskId).setValue(true);
             database.child("tasks").child(taskId).child("title").setValue(title);
             database.child("tasks").child(taskId).child("description").setValue(description);
+            database.child("tasks").child(taskId).child("creatorID").setValue(userId);
             database.child("tasks").child(taskId).child("payment").setValue(payment,  new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {

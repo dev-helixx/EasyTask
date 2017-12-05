@@ -100,10 +100,10 @@ public class EditTaskFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                     if (databaseError != null) {
-                        Toasty.error(getContext(), "Failed to create task", Toast.LENGTH_SHORT).show();
+                        Toasty.error(getContext(), "Kunne ikke opdatere! Prøv igen.", Toast.LENGTH_SHORT).show();
                         edit_task_btn.setEnabled(true);
                     } else {
-                        Toasty.success(getContext(), "Opgave slettet! ", Toast.LENGTH_SHORT, true).show();
+                        Toasty.success(getContext(), "Opgaven blev opdateret!", Toast.LENGTH_SHORT, true).show();
                         hideFragment();
 
                     }

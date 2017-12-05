@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -114,13 +115,13 @@ public class FindTasksFragment extends Fragment {
 
         database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot taskData) {
+            public void onDataChange(DataSnapshot db) {
 
                 taskList.clear();
 
-                for (DataSnapshot globalTasks : taskData.child("tasks").getChildren()) {
+                for (DataSnapshot globalTasks : db.child("tasks").getChildren()) {
 
-                    taskList.add(new Task(globalTasks.child("title").getValue().toString(), globalTasks.child("description").getValue().toString(), globalTasks.getKey(), Integer.parseInt(globalTasks.child("payment").getValue().toString())));
+                    taskList.add(new Task(globalTasks.child("title").getValue().toString(), globalTasks.child("description").getValue().toString(), globalTasks.getKey(), Integer.parseInt(globalTasks.child("payment").getValue().toString()), globalTasks.child("creatorID").getValue().toString()));
 
                 }
 

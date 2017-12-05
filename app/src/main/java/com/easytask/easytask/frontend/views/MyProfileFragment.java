@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.easytask.easytask.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,12 +18,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import es.dmoral.toasty.Toasty;
+
 
 public class MyProfileFragment extends Fragment implements View.OnClickListener {
 
     private DatabaseReference database;
     private FirebaseAuth firebaseAuth;
-    private Button changeProfileButton;
+    private Button editProfileButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,16 +39,16 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener 
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference();
 
-        getActivity().setTitle("My Profile");
 
         final TextView name = (TextView) view.findViewById(R.id.my_profile_name);
         final TextView address = (TextView) view.findViewById(R.id.my_profile_address);
         final TextView zipCode = (TextView) view.findViewById(R.id.my_profile_zipcode);
         final TextView city = (TextView) view.findViewById(R.id.my_profile_city);
+        final TextView phone = (TextView) view.findViewById(R.id.my_profile_phonenumber);
 
-        changeProfileButton = (Button) view.findViewById(R.id.my_profile_changeProfileBtn);
+        editProfileButton = (Button) view.findViewById(R.id.my_profile_editProfileBtn);
 
-        changeProfileButton.setOnClickListener(this);
+        editProfileButton.setOnClickListener(this);
 
 
         database.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -58,6 +61,8 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener 
                 address.setText(snap.child("users").child(firebaseAuth.getCurrentUser().getUid()).child("address").getValue().toString());
                 zipCode.setText(snap.child("users").child(firebaseAuth.getCurrentUser().getUid()).child("zipCode").getValue().toString());
                 city.setText(snap.child("users").child(firebaseAuth.getCurrentUser().getUid()).child("city").getValue().toString());
+                phone.setText(snap.child("users").child(firebaseAuth.getCurrentUser().getUid()).child("phonenumber").getValue().toString());
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -70,10 +75,11 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View view) {
 
-        if (view == changeProfileButton){
+        if (view == editProfileButton){
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
-            ft.replace(R.id.fragment_container_main, new EditMyProfileFragment());
+            ft.replace(R.id.fragment_container_main, new EditMyProfileFragment(), "editprofilefragment");
+            ft.addToBackStack(null);
             ft.commit();
 
         }

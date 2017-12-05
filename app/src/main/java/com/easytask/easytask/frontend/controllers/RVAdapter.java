@@ -5,11 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.easytask.easytask.R;
 import com.easytask.easytask.frontend.views.DetailedTaskActivity;
+import com.easytask.easytask.frontend.views.MainActivity;
 
 import java.util.List;
 
@@ -21,6 +23,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TaskViewHolder>{
 
     private List<Task> tasks;
     private String description, subject;
+    private String creatorID;
 
     public RVAdapter(List<Task> tasks){
         this.tasks = tasks;
@@ -38,11 +41,16 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TaskViewHolder>{
     @Override
     public void onBindViewHolder(TaskViewHolder holder, int i) {
 
+
         description = tasks.get(i).getCard_description();
         subject = tasks.get(i).getCard_subject();
+        creatorID = tasks.get(i).getCreatorID();
+
 
         holder.card_subject.setText(subject);
         holder.card_description.setText(description);
+        holder.creatorID = creatorID;
+
 
     }
 
@@ -60,6 +68,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TaskViewHolder>{
     public static class TaskViewHolder extends RecyclerView.ViewHolder {
         TextView card_subject;
         TextView card_description;
+        String creatorID;
 
         TaskViewHolder(final View itemView) {
             super(itemView);
@@ -70,10 +79,12 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TaskViewHolder>{
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     Intent intent = new Intent();
                     intent.setClass(itemView.getContext(), DetailedTaskActivity.class);
                     intent.putExtra("task_subject", card_subject.getText());
                     intent.putExtra("task_description", card_description.getText());
+                    intent.putExtra("task_creator", creatorID);
 //                    intent.putExtra("task_image", R.id.detailed_task_image);
                     itemView.getContext().startActivity(intent);
 //                    Toast.makeText(v.getContext(),card_subject.getText(), Toast.LENGTH_SHORT).show();
