@@ -40,7 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email"
-                    android:text="silas@test.com"
+                    android:text="DTU@test.dk"
                     android:inputType="textEmailAddress" />
             </android.support.design.widget.TextInputLayout>
 
@@ -56,7 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Password"
-                    android:text="test1234"
+                    android:text="123456"
                     android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
 

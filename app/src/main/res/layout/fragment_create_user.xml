@@ -167,7 +167,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:background="@color/blåFarve3"
+                android:background="@color/blåFarve5"
+                android:textColor="#FFFFFF"
                 android:text="@string/login_create_user_btn" />
 
 
