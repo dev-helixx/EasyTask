@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.easytask.easytask.R;
+import com.easytask.easytask.frontend.controllers.LVAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
  * Created by Silas on 27-09-2017.
  */
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, LVAdapter.OnChangeFragmentListener {
 
 
     private TextView user_name, user_email;
@@ -265,6 +266,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView.setNavigationItemSelectedListener(this);
 
+    }
+
+    @Override
+    public void changeFragment(String taskID) {
+        /* Interface method for changing fragment inside LVAdapter class */
+
+        Bundle bundle = new Bundle();
+        bundle.putString("taskid", taskID);
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
+        Fragment editTaskFragment = new EditTaskFragment();
+        editTaskFragment.setArguments(bundle);
+        ft.add(R.id.fragment_container_main, editTaskFragment, "edittaskfragment");
+        ft.addToBackStack(null);
+        ft.commit();
     }
 
 

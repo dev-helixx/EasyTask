@@ -67,14 +67,14 @@ public class EditTaskFragment extends Fragment implements View.OnClickListener {
         return_btn.setOnClickListener(this);
         edit_task_btn.setOnClickListener(this);
 
-        Task task = new Task();
-        taskId = task.getTaskID();
+        taskId = getArguments().getString("taskid");
 
         database.addListenerForSingleValueEvent(new ValueEventListener() {
 
 
             @Override
             public void onDataChange(DataSnapshot snap) {
+
 
                 titleET.setText(snap.child("tasks").child(taskId).child("title").getValue().toString());
                 descriptionET.setText(snap.child("tasks").child(taskId).child("description").getValue().toString());

@@ -38,21 +38,25 @@ import es.dmoral.toasty.Toasty;
 
 public class LVAdapter extends ArrayAdapter{
 
+    public interface OnChangeFragmentListener { void changeFragment(String taskID);}
+
+
     //to reference the Activity
     private Activity context;
     private List<Task> taskList;
     private DatabaseReference database;
     private FirebaseAuth firebaseAuth;
     private String userID;
-//    private Integer[] imageIDarray;
+    private OnChangeFragmentListener onChangeFragmentListener;
+
+
 
     public LVAdapter(Activity context, List<Task> taskList/*, List<Task> descriptionArrayParam, Integer[] imageIDArrayParam*/){
         super(context, R.layout.listview_row_layout , taskList);
-
         this.context = context;
         this.taskList = taskList;
-//        this.imageIDarray = imageIDArrayParam;
 
+        onChangeFragmentListener = (OnChangeFragmentListener) context;
 
         /* Get database references */
         firebaseAuth = FirebaseAuth.getInstance();
@@ -160,28 +164,30 @@ public class LVAdapter extends ArrayAdapter{
             @Override
             public void onClick(View v) {
 
-                database.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot taskData) {
+                onChangeFragmentListener.changeFragment(taskList.get(position).getTaskID());
 
-
-                        for(DataSnapshot globalTasks : taskData.child("tasks").getChildren()) {
-
-                            if (globalTasks.getKey().equals(taskList.get(position).getTaskID())) {
-
-                                Task task = new Task();
-                                task.setTaskID(taskList.get(position).getTaskID());
-
-                            }
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+//                database.addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot taskData) {
+//
+//
+//                        for(DataSnapshot globalTasks : taskData.child("tasks").getChildren()) {
+//
+//                            if (globalTasks.getKey().equals(taskList.get(position).getTaskID())) {
+//
+//                                Task task = new Task();
+//                                task.setTaskID(taskList.get(position).getTaskID());
+//
+//                            }
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//
+//                    }
+//                });
 
 
                 // Open edit task fragment

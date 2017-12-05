@@ -83,8 +83,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:background="@color/blåFarve3"
-                android:text="Opret Opgave" />
+                android:textColor="#FFFFFF"
+                android:background="@color/blåFarve4"
+                android:text="Gem ændringer" />
 
 
         </LinearLayout>
@@ -95,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Tilbage til startsiden" />
+            android:text="Tilbage til mine opgaver" />
 
 
     </LinearLayout>
