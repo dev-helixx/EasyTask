@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -45,6 +46,7 @@ public class EditMyProfileFragment extends Fragment implements View.OnClickListe
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference();
 
+        setHasOptionsMenu(true);
         getActivity().setTitle("Min Profil");
 
         nameET = (EditText) view.findViewById(R.id.edit_profile_name);
@@ -80,6 +82,11 @@ public class EditMyProfileFragment extends Fragment implements View.OnClickListe
 
     }
 
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_addTask).setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+    }
 
     @Override
     public void onClick(View view) {

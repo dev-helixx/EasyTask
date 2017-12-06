@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -39,6 +40,7 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener 
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference();
 
+        setHasOptionsMenu(true);
         getActivity().setTitle("Min Profil");
 
         final TextView name = (TextView) view.findViewById(R.id.my_profile_name);
@@ -72,6 +74,11 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener 
 
     }
 
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_addTask).setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+    }
 
     @Override
     public void onClick(View view) {

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -52,6 +53,7 @@ public class MyTasksFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
 
+        setHasOptionsMenu(true);
         getActivity().setTitle("Mine Opgaver");
 
         progressDialog = ProgressDialog.show(getContext(), "Henter alle dine opgaver", "Vent venligst", false, false);
@@ -111,6 +113,12 @@ public class MyTasksFragment extends Fragment {
 
     }
 
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_addTask).setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+    }
+
     private void addDataToListView() {
 
 
@@ -139,6 +147,8 @@ public class MyTasksFragment extends Fragment {
                 progressDialog.dismiss();
 
             }
+
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
