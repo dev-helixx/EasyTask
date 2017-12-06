@@ -45,7 +45,7 @@ public class EditMyProfileFragment extends Fragment implements View.OnClickListe
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference();
 
-        getActivity().setTitle("My Profile");
+        getActivity().setTitle("Min Profil");
 
         nameET = (EditText) view.findViewById(R.id.edit_profile_name);
         addressET = (EditText) view.findViewById(R.id.edit_my_profile_address1);

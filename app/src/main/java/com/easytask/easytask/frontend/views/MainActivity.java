@@ -142,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             createTaskActionButton.setVisible(false);
         }else {
             createTaskActionButton.setVisible(true);
+
         }
         return true;
     }

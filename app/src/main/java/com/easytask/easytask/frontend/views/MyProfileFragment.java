@@ -39,7 +39,7 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener 
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference();
 
-        getActivity().setTitle("My Profile");
+        getActivity().setTitle("Min Profil");
 
         final TextView name = (TextView) view.findViewById(R.id.my_profile_name);
         final TextView address = (TextView) view.findViewById(R.id.my_profile_address);
