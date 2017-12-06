@@ -128,7 +128,7 @@ public class MyTasksFragment extends Fragment {
                         if (globalTasks.getKey().equals(userTasks.getKey())) {
 
 //                            taskList.add(new Task(globalTasks.child("title").getValue().toString(), globalTasks.child("description").getValue().toString(), globalTasks.getKey(), Integer.parseInt(globalTasks.child("payment").getValue().toString()), globalTasks.child("")));
-                            taskList.add(new Task(globalTasks.child("title").getValue().toString(), globalTasks.child("description").getValue().toString(), globalTasks.getKey(), Integer.parseInt(globalTasks.child("payment").getValue().toString()), globalTasks.child("creatorID").getValue().toString()));
+                            taskList.add(new Task(globalTasks.child("title").getValue().toString(), globalTasks.child("description").getValue().toString(), globalTasks.getKey(), globalTasks.child("payment").getValue().toString(), globalTasks.child("creatorID").getValue().toString()));
 
                         }
                 }

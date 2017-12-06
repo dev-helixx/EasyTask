@@ -23,11 +23,13 @@ public class DetailedTaskActivity extends AppCompatActivity implements View.OnCl
     private Button contact_btn;
     private String subject;
     private String description;
+    private String payment;
     private String creatorID;
 //    private int imageID;
 
     private TextView detailed_task_subject;
     private TextView detailed_task_description;
+    private TextView detailed_task_payment;
 //    private ImageView detailed_task_image;
 
     @Override
@@ -44,6 +46,7 @@ public class DetailedTaskActivity extends AppCompatActivity implements View.OnCl
         /* Instantiate views */
         detailed_task_description = (TextView) findViewById(R.id.detailed_task_description);
         detailed_task_subject = (TextView) findViewById(R.id.detailed_task_subject);
+        detailed_task_payment = (TextView) findViewById(R.id.detailed_task_payment);
         contact_btn = (Button) findViewById(R.id.detailed_task_contact_btn);
 //        imageID = (ImageView) findViewById(R.id.detailed_task_image);
 
@@ -51,12 +54,14 @@ public class DetailedTaskActivity extends AppCompatActivity implements View.OnCl
         Intent myIntent = getIntent();
         subject = myIntent.getStringExtra("task_subject");
         description = myIntent.getStringExtra("task_description");
+        payment = myIntent.getStringExtra("task_payment");
         creatorID = myIntent.getStringExtra("task_creator");
 //        imageID = myIntent.getIntExtra("detailed_task_image");
 
         /* Add values to textviews */
         detailed_task_subject.setText(subject);
         detailed_task_description.setText(description);
+        detailed_task_payment.setText(payment);
 
         contact_btn.setOnClickListener(this);
 

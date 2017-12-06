@@ -72,6 +72,7 @@ public class LVAdapter extends ArrayAdapter{
         View rowView=inflater.inflate(R.layout.listview_row_layout, null,true);
 
         //this code gets references to objects in the listview_row.xml file
+        TextView payField = (TextView) rowView.findViewById(R.id.my_tasks_payment);
         TextView subjectField = (TextView) rowView.findViewById(R.id.my_tasks_subject);
         TextView descriptionField = (TextView) rowView.findViewById(R.id.my_tasks_description);
         ImageButton delete_my_task = (ImageButton) rowView.findViewById(R.id.my_tasks_delete_button);
@@ -83,6 +84,7 @@ public class LVAdapter extends ArrayAdapter{
         //this code sets the values of the objects to values from the arrays
         subjectField.setText(taskList.get(position).getCard_subject());
         descriptionField.setText(taskList.get(position).getCard_description());
+        payField.setText(taskList.get(position).getTaskReward() + " kr.");
 //        imageView.setImageResource(imageIDarray[position]);
 
 

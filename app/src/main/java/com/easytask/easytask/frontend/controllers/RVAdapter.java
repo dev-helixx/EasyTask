@@ -22,7 +22,9 @@ import java.util.List;
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TaskViewHolder>{
 
     private List<Task> tasks;
-    private String description, subject;
+    private String description;
+    private String subject;
+    private String pay;
     private String creatorID;
 
     public RVAdapter(List<Task> tasks){
@@ -41,7 +43,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TaskViewHolder>{
     @Override
     public void onBindViewHolder(TaskViewHolder holder, int i) {
 
-
+        pay = tasks.get(i).getTaskReward();
         description = tasks.get(i).getCard_description();
         subject = tasks.get(i).getCard_subject();
         creatorID = tasks.get(i).getCreatorID();
@@ -49,6 +51,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TaskViewHolder>{
 
         holder.card_subject.setText(subject);
         holder.card_description.setText(description);
+        holder.card_payment.setText(pay + " kr.");
         holder.creatorID = creatorID;
 
 
@@ -68,22 +71,26 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TaskViewHolder>{
     public static class TaskViewHolder extends RecyclerView.ViewHolder {
         TextView card_subject;
         TextView card_description;
+        TextView card_payment;
         String creatorID;
 
         TaskViewHolder(final View itemView) {
             super(itemView);
             card_subject = (TextView)itemView.findViewById(R.id.card_subject);
             card_description = (TextView)itemView.findViewById(R.id.card_description);
+            card_payment = (TextView)itemView.findViewById(R.id.cardPay);
 
             /* Handles card clicks*/
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
+
                     Intent intent = new Intent();
                     intent.setClass(itemView.getContext(), DetailedTaskActivity.class);
                     intent.putExtra("task_subject", card_subject.getText());
                     intent.putExtra("task_description", card_description.getText());
+                    intent.putExtra("task_payment", card_payment.getText());
                     intent.putExtra("task_creator", creatorID);
 //                    intent.putExtra("task_image", R.id.detailed_task_image);
                     itemView.getContext().startActivity(intent);

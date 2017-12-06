@@ -11,10 +11,10 @@ public class Task {
     private String card_description;
     private String taskID;
     private String creatorID;
-    private int taskReward;
+    private String taskReward;
 
 
-    public Task(String card_subject, String card_description, String taskID, int taskReward, String creatorID) {
+    public Task(String card_subject, String card_description, String taskID, String taskReward, String creatorID) {
         this.card_subject = card_subject;
         this.card_description = card_description;
         this.taskID = taskID;
@@ -40,10 +40,10 @@ public class Task {
     }
     public void setTaskID(String taskID) {this.taskID = taskID;}
 
-    public int getTaskReward() {
+    public String getTaskReward() {
         return taskReward;
     }
-    public void setTaskReward(int taskReward) {this.taskReward = taskReward;}
+    public void setTaskReward(String taskReward) {this.taskReward = taskReward;}
 
     public String getCreatorID() {
         return creatorID;
