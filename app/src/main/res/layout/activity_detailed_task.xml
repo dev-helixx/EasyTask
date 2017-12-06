@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/layout_boarder"
+    android:backgroundTint="#FFFFFF"
     tools:context="com.easytask.easytask.frontend.views.DetailedTaskActivity">
 
 
@@ -14,19 +15,7 @@
         android:layout_gravity="center"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/detailed_task_payment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/create_task_payment" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,6 +56,29 @@
 
         </ScrollView>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:background="@drawable/layout_boarder">
+
+            <TextView
+                android:id="@+id/label1"
+                android:textSize="20sp"
+                android:layout_marginRight="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Honorar:" />
+
+            <TextView
+                android:id="@+id/detailed_task_payment"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="999 kr" />
+        </LinearLayout>
+
         <Button
             android:id="@+id/detailed_task_contact_btn"
             android:layout_width="match_parent"
@@ -74,9 +86,7 @@
             android:text="Kontakt opgavestiller"
             android:background="@color/blåFarve4"
             android:textColor="#FFFFFF"
-            android:padding="5dp"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
             />
 
 
