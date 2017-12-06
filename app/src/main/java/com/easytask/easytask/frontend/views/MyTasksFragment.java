@@ -53,7 +53,6 @@ public class MyTasksFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
 
-        setHasOptionsMenu(true);
         getActivity().setTitle("Mine Opgaver");
 
         progressDialog = ProgressDialog.show(getContext(), "Henter alle dine opgaver", "Vent venligst", false, false);
@@ -113,11 +112,6 @@ public class MyTasksFragment extends Fragment {
 
     }
 
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.action_addTask).setVisible(false);
-        super.onPrepareOptionsMenu(menu);
-    }
 
     private void addDataToListView() {
 
