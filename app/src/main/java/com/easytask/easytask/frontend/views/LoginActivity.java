@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,6 +49,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         /* Hides the actionbar on the login screen. This needs to be called before setContentView */
         ActionBar actionBar =  getSupportActionBar();
         actionBar.hide();
+
+                /* Makes sure that the fragment isn't pushed up by the screen keyboard*/
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         setContentView(R.layout.activity_login);
 

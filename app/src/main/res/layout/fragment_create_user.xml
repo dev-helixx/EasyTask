@@ -9,8 +9,7 @@
     android:clickable="true"
     android:orientation="vertical"
     android:layout_marginTop="15dp"
-    android:layout_marginBottom="15dp"
-    android:weightSum="1">
+    android:layout_marginBottom="15dp">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -18,20 +17,25 @@
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         android:text="@string/create_user_title"
+        android:layout_weight="5"
         android:layout_gravity="center"
         android:textSize="30sp" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="424dp">
+        android:layout_height="match_parent"
+        android:fadeScrollbars="false"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:fillViewport="true"
+        android:layout_weight="2">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
             android:orientation="vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
@@ -162,24 +166,28 @@
                 android:layout_height="wrap_content"
                 android:text="@string/create_user_type_2" />
 
-            <Button
-                android:id="@+id/create_user_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:background="@color/blåFarve5"
-                android:textColor="#FFFFFF"
-                android:text="@string/login_create_user_btn" />
-
 
         </LinearLayout>
     </ScrollView>
 
     <Button
+        android:id="@+id/create_user_btn"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:layout_marginTop="15dp"
+        android:background="@color/blåFarve5"
+        android:textColor="#FFFFFF"
+        android:text="@string/login_create_user_btn" />
+
+    <Button
+        android:layout_weight="5"
         android:id="@+id/create_return_btn"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:text="@string/create_user_return_btn" />
 

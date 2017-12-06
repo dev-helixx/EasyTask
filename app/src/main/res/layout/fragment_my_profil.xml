@@ -36,23 +36,33 @@
             android:text="Adresse"
             android:textSize="24sp" />
 
-        <TextView
-            android:id="@+id/my_profile_zipcode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingTop="5dp"
-            android:text="Postnummer"
-            android:textSize="24dp" />
 
-        <TextView
-            android:id="@+id/my_profile_city"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingTop="5dp"
-            android:text="By"
-            android:textSize="24dp" />
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/my_profile_zipcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:paddingTop="5dp"
+                android:text="Postnummer"
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/my_profile_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="5dp"
+                android:text="By"
+                android:textSize="24dp" />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/my_profile_phonenumber"

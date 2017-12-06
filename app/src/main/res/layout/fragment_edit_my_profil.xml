@@ -33,6 +33,7 @@
 
         <ImageView
             android:id="@+id/edit_profile_picture"
+            android:scaleType="fitXY"
             android:layout_width="106dp"
             android:layout_height="123dp"
             android:layout_gravity="center"
@@ -49,65 +50,81 @@
             android:layout_marginBottom="10dp"
             android:text="Skift Profil Billede" />
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
-            <EditText
-                android:paddingTop="0dp"
-                android:id="@+id/edit_my_profile_address1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Adresse"
-                android:hint="Adresse"/>
-        </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="50dp">
-            <EditText
-                android:paddingTop="0dp"
-                android:id="@+id/edit_my_profile_zipCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Postnummer"
-                android:hint="Postnummer"/>
-        </android.support.design.widget.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:fadeScrollbars="false">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp" >
-            <EditText
-                android:paddingTop="0dp"
-                android:id="@+id/edit_my_profile_city"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="By"
-                android:hint="By"/>
-        </android.support.design.widget.TextInputLayout>
+                android:orientation="vertical"
+                android:layout_gravity="center">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp" >
-            <EditText
-                android:paddingTop="0dp"
-                android:id="@+id/edit_my_profile_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="+45454545"
-                android:hint="Telefonnummer"/>
-        </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                    <EditText
+                        android:paddingTop="0dp"
+                        android:id="@+id/edit_my_profile_address1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="Adresse"
+                        android:hint="Adresse"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                    <EditText
+                        android:paddingTop="0dp"
+                        android:id="@+id/edit_my_profile_zipCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="Postnummer"
+                        android:hint="Postnummer"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" >
+                    <EditText
+                        android:paddingTop="0dp"
+                        android:id="@+id/edit_my_profile_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="By"
+                        android:hint="By"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" >
+                    <EditText
+                        android:paddingTop="0dp"
+                        android:id="@+id/edit_my_profile_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="+45454545"
+                        android:hint="Telefonnummer"/>
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+        </ScrollView>
+
+
 
 
         <Button
