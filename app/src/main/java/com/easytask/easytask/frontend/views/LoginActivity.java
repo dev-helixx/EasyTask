@@ -17,6 +17,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeInfoDialog;
+import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeProgressDialog;
 import com.easytask.easytask.R;
 import com.easytask.easytask.util.Validator;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -96,7 +99,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             if(email.isEmpty() || password.isEmpty())
             {
-                Toast.makeText(this, "You need to fill out all fields", Toast.LENGTH_SHORT).show();
+                Toasty.info(this, "Du skal udfylde alle felter", Toast.LENGTH_SHORT, true).show();
             }
             else
             {
@@ -109,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 else
                 {
-                    Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                    Toasty.error(this, "Noget gik galt", Toast.LENGTH_SHORT, true).show();
                 }
             }
 
@@ -130,7 +133,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void attemptLogin() {
-        progressDialog = ProgressDialog.show(this, "Logger ind", "Vent venligst", false, false);
+
+        final AwesomeProgressDialog dialog = new AwesomeProgressDialog(this);
+                dialog.setTitle("Logger ind");
+                dialog.setMessage("Vent venligst");
+                dialog.setColoredCircle(R.color.dialogInfoBackgroundColor);
+                dialog.setDialogIconAndColor(R.drawable.ic_dialog_info, R.color.white);
+                dialog.setCancelable(true);
+                dialog.show();
+
+//        progressDialog = ProgressDialog.show(this, "Logger ind", "Vent venligst", false, false);
 
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
@@ -140,14 +152,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (loginResult.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Toasty.success(LoginActivity.this, "Success! ", Toast.LENGTH_SHORT, true).show();
-                            progressDialog.dismiss();
-
+//                            progressDialog.dismiss();
+                            dialog.hide();
                             Intent mainscreen = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(mainscreen);
                         } else {
                             // If sign in fails, display a message to the user.
                             Toasty.error(LoginActivity.this, "Kunne ikke logge ind! ", Toast.LENGTH_SHORT, true).show();
-                            progressDialog.dismiss();
+//                            progressDialog.dismiss();
+                            dialog.hide();
                         }
                     }
                 });

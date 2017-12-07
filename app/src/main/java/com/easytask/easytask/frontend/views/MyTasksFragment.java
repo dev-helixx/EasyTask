@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeProgressDialog;
 import com.easytask.easytask.R;
 import com.easytask.easytask.frontend.controllers.LVAdapter;
 import com.easytask.easytask.frontend.controllers.Task;
@@ -40,6 +41,7 @@ public class MyTasksFragment extends Fragment {
     private List<Task> taskList, descriptionArray;
     private ProgressDialog progressDialog;
     private LVAdapter myTasksAdapter;
+    private AwesomeProgressDialog dialog;
 
 
     @Override
@@ -55,7 +57,16 @@ public class MyTasksFragment extends Fragment {
 
         getActivity().setTitle("Mine Opgaver");
 
-        progressDialog = ProgressDialog.show(getContext(), "Henter alle dine opgaver", "Vent venligst", false, false);
+
+        dialog = new AwesomeProgressDialog(getContext());
+        dialog.setTitle("Henter alle dine opgaver");
+        dialog.setMessage("Vent venligst");
+        dialog.setColoredCircle(R.color.dialogInfoBackgroundColor);
+        dialog.setDialogIconAndColor(R.drawable.ic_dialog_info, R.color.white);
+        dialog.setCancelable(true);
+        dialog.show();
+
+//        progressDialog = ProgressDialog.show(getContext(), "Henter alle dine opgaver", "Vent venligst", false, false);
 
         taskList = new ArrayList<>();
         myTasksAdapter = new LVAdapter(getActivity(), taskList);
@@ -138,7 +149,8 @@ public class MyTasksFragment extends Fragment {
 
 
                 my_tasks_listview.setAdapter(myTasksAdapter);
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
+                dialog.hide();
 
             }
 

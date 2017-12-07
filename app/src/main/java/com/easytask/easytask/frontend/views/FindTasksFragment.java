@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeProgressDialog;
 import com.easytask.easytask.R;
 import com.easytask.easytask.frontend.controllers.RVAdapter;
 import com.easytask.easytask.frontend.controllers.Task;
@@ -39,6 +40,7 @@ public class FindTasksFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private RVAdapter adapter;
     private String userId;
+    private AwesomeProgressDialog dialog;
 
 
 
@@ -57,7 +59,15 @@ public class FindTasksFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference();
 
-        progressDialog = ProgressDialog.show(getContext(), "Henter alle tilgængelige opgaver", "Vent venligst", false, false);
+        dialog = new AwesomeProgressDialog(getContext());
+        dialog.setTitle("Henter alle tilgængelige opgaver");
+        dialog.setMessage("Vent venligst");
+        dialog.setColoredCircle(R.color.dialogInfoBackgroundColor);
+        dialog.setDialogIconAndColor(R.drawable.ic_dialog_info, R.color.white);
+        dialog.setCancelable(true);
+        dialog.show();
+
+//        progressDialog = ProgressDialog.show(getContext(), "Henter alle tilgængelige opgaver", "Vent venligst", false, false);
 
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview);
 
@@ -126,7 +136,8 @@ public class FindTasksFragment extends Fragment {
                 }
 
                 recyclerView.setAdapter(adapter);
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
+                dialog.hide();
 
             }
             @Override

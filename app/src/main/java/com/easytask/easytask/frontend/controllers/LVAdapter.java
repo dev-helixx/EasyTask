@@ -123,7 +123,7 @@ public class LVAdapter extends ArrayAdapter{
                                         usersTasksRef.getRef().removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull com.google.android.gms.tasks.Task<Void> task) {
-                                                Toasty.success(context, "Opgave slettet! ", Toast.LENGTH_SHORT, true).show();
+                                                Toasty.success(context, "Success! ", Toast.LENGTH_SHORT, true).show();
                                             }
                                         });
 
