@@ -96,14 +96,14 @@ public class LVAdapter extends ArrayAdapter{
                 new AwesomeInfoDialog(context)
                         .setTitle("Advarsel!")
                         .setMessage("Du er ved at slette din opgave. Er du sikker på du vil fortsætte?")
-                        .setColoredCircle(R.color.dialogInfoBackgroundColor)
+                        .setColoredCircle(R.color.blåFarve1)
                         .setDialogIconAndColor(R.drawable.ic_dialog_info, R.color.white)
                         .setCancelable(true)
                         .setPositiveButtonText("Ja")
-                        .setPositiveButtonbackgroundColor(R.color.dialogInfoBackgroundColor)
+                        .setPositiveButtonbackgroundColor(R.color.blåFarve7)
                         .setPositiveButtonTextColor(R.color.white)
                         .setNegativeButtonText("Nej")
-                        .setNegativeButtonbackgroundColor(R.color.dialogInfoBackgroundColor)
+                        .setNegativeButtonbackgroundColor(R.color.blåFarve3)
                         .setNegativeButtonTextColor(R.color.white)
                         .setPositiveButtonClick(new Closure() {
                             @Override

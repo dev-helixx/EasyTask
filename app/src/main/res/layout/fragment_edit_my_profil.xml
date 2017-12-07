@@ -44,16 +44,16 @@
 
         <Button
             android:id="@+id/edit_profilepicture_button"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/blåFarve5"
-            android:textColor="#FFFFFF"
             android:layout_marginBottom="10dp"
-            android:text="Skift Profil Billede" />
+            android:layout_marginTop="10dp"
+            android:background="@color/blåFarve7"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Skift Profil Billede"
+            android:textColor="#FFFFFF" />
 
 
         <ScrollView
