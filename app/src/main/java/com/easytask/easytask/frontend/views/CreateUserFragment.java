@@ -37,7 +37,7 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
 
     private Button return_btn, create_user_btn;
     private EditText usernameET, passwordET, confirmPassET, nameET, addressET, zipCodeET, cityET, phoneET;
-    private String username, password;
+    private String username, password, confirmPass, name, adress, zipCode, city, phone;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference database;
     private ProgressDialog progressDialog;
@@ -112,15 +112,39 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
             removeFragment();
         }else if(view == create_user_btn ) {
 
-            username = usernameET.getText().toString();
-            if (passwordET.getText().toString().equals(confirmPassET.getText().toString())) {
-//                Toast.makeText(getContext(), "Passwords match", Toast.LENGTH_SHORT).show();
-                password = passwordET.getText().toString();
+            password = passwordET.getText().toString().replaceAll("^\\s+", "").replaceAll("\\s+$", "");
+            username = usernameET.getText().toString().replaceAll("^\\s+", "").replaceAll("\\s+$", "");
+            confirmPass = confirmPassET.getText().toString().replaceAll("^\\s+", "").replaceAll("\\s+$", "");
+            name = nameET.getText().toString().replaceAll("^\\s+", "").replaceAll("\\s+$", "");
+            adress = addressET.getText().toString().replaceAll("^\\s+", "").replaceAll("\\s+$", "");
+            zipCode = zipCodeET.getText().toString().replaceAll("^\\s+", "").replaceAll("\\s+$", "");
+            city = cityET.getText().toString().replaceAll("^\\s+", "").replaceAll("\\s+$", "");
+            phone = phoneET.getText().toString().replaceAll("^\\s+", "").replaceAll("\\s+$", "");
 
-                loadViewTask = new LoadViewTask();
-                loadViewTask.execute();
+
+            String passWordReplace = password.replace(" ","");
+            String usernameReplace = username.replace(" ","");
+            String confirmPassReplace = confirmPass.replace(" ","");
+            String nameReplace = name.replace(" ","");
+            String adressReplace = adress.replace(" ","");
+            String zipCodeReplace = zipCode.replace(" ","");
+            String cityReplace = city.replace(" ","");
+            String phoneReplace = phone.replace(" ","");
+
+            if (username != "" && password != "" && confirmPass != "" && name != "" && adress != "" && zipCode != "" && city != "" && phone != "" && usernameReplace != "" && passWordReplace != "" && confirmPassReplace != "" && nameReplace != "" && adressReplace != "" && zipCodeReplace != "" && cityReplace != "" && phoneReplace != "" && task_creator.isChecked() != task_doer.isChecked()) {
+
+                username = usernameET.getText().toString();
+                if (password.equals(confirmPass)) {
+//                Toast.makeText(getContext(), "Passwords match", Toast.LENGTH_SHORT).show();
+
+                    loadViewTask = new LoadViewTask();
+                    loadViewTask.execute();
+                } else {
+                    Toast.makeText(getContext(), "Passwords does not match!", Toast.LENGTH_LONG).show();
+                }
+
             } else {
-                Toast.makeText(getContext(), "Passwords does not match!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Husk at udfylde alle felter", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -154,9 +178,9 @@ public class CreateUserFragment extends Fragment implements View.OnClickListener
 //            editor.putString("password", passwordET.getText().toString()).commit();
 //            editor.commit();
             if(task_creator.isChecked()) {
-                createNewUserInDatabase(usernameET.getText().toString(), true, nameET.getText().toString(), addressET.getText().toString(), zipCodeET.getText().toString(), cityET.getText().toString(), phoneET.getText().toString());
+                createNewUserInDatabase(username, true, name, adress, zipCode, city, phone);
             }else {
-                createNewUserInDatabase(usernameET.getText().toString(), false, nameET.getText().toString(), addressET.getText().toString(), zipCodeET.getText().toString(), cityET.getText().toString(), phoneET.getText().toString());
+                createNewUserInDatabase(username, false, name, adress, zipCode, city, phone);
             }
             removeFragment();
             startActivity(new Intent(getContext(), MainActivity.class));
